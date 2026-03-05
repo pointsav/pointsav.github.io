@@ -6,217 +6,116 @@
     <title>PointSav Digital Systems™ - Corporate Disclosure</title>
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --text-main: #e0e0e0;
-            --text-muted: #888888;
-            --accent: #ffffff;
-            --border: #2a2a2a;
-            --surface: #141414;
+            --ps-black: #000000;
+            --ps-grey-dark: #292929;
+            --ps-grey-light: #A3A3A3;
+            --ps-white: #ffffff;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         }
-        
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
             font-family: var(--font-sans);
+            background-color: var(--ps-black);
+            color: var(--ps-grey-light);
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
+            display: flex;
+            justify-content: center;
         }
-
+        .site-wrapper { max-width: 800px; width: 100%; margin: 40px 20px; }
+        .top-nav {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+            font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ps-grey-light);
+        }
+        .top-nav a { color: var(--ps-white); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .top-nav a:hover { color: var(--ps-grey-light); }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 24px;
+            background: var(--ps-grey-dark); padding: 50px 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-top: 6px solid var(--ps-white);
         }
-
-        header {
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-        }
-
-        .brand-header {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        h1 {
-            color: var(--accent);
-            font-size: 2.4rem;
-            line-height: 1.2;
-            font-weight: 600;
-            margin: 0 0 16px 0;
-            letter-spacing: -0.02em;
-        }
-
-        .dateline {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        h2 {
-            color: var(--accent);
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-top: 48px;
-            margin-bottom: 16px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 8px;
-        }
-
-        p {
-            margin-top: 0;
-            margin-bottom: 24px;
-        }
-
-        ul {
-            margin-top: 0;
-            margin-bottom: 24px;
-            padding-left: 24px;
-        }
-
-        /* SURGICAL PATCH: Restores padding specifically for nested lists */
-        li ul {
-            margin-top: 16px; 
-        }
-
-        li {
-            margin-bottom: 12px;
-        }
-
-        strong {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .contact-block {
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 24px;
-            margin-top: 48px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
-
-        .contact-block strong {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.8rem;
-        }
-
-        .legal-block {
-            margin-top: 80px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            text-align: justify;
-        }
-
-        .legal-block h3 {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 12px;
-        }
-
-        a {
-            color: var(--text-main);
-            text-decoration: underline;
-            text-decoration-color: var(--border);
-            text-underline-offset: 4px;
-        }
-
-        a:hover {
-            color: var(--accent);
-            text-decoration-color: var(--text-muted);
-        }
+        h1, h2, h3 { color: var(--ps-white); font-weight: 600; }
+        h1 { font-size: 1.8rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { font-size: 1.2rem; font-weight: 500; margin-top: 0; margin-bottom: 20px; color: var(--ps-white); }
+        .dateline { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ps-grey-light); margin-bottom: 30px; border-bottom: 1px solid #000000; padding-bottom: 15px; }
+        p { margin-bottom: 20px; text-align: justify; }
+        ul { margin-top: 0; margin-bottom: 24px; padding-left: 24px; }
+        li ul { margin-top: 16px; }
+        li { margin-bottom: 12px; }
+        strong { color: var(--ps-white); font-weight: 600; }
+        .legal-block { margin-top: 50px; padding-top: 20px; border-top: 2px solid #000000; font-size: 0.85rem; color: var(--ps-grey-light); text-align: left; }
+        .legal-block h3 { font-size: 1rem; color: var(--ps-grey-light); margin-bottom: 10px; }
+        .crypto-footer { margin-top: 20px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-grey-light); text-align: center; line-height: 1.8; }
+        .crypto-footer span { display: block; }
+        @media (max-width: 600px) { .container { padding: 30px 20px; } h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <span class="brand-header">POINTSAV DIGITAL SYSTEMS™ // MEDIA RELEASE</span>
-            <h1>PointSav Digital Systems Introduces the "Digital First" Operating System for Real Estate Infrastructure</h1>
-            <div class="dateline">FOR IMMEDIATE RELEASE &nbsp;|&nbsp; VANCOUVER, BC &nbsp;|&nbsp; MARCH 2, 2026</div>
-        </header>
-
-        <section class="content">
-            <p><strong>WOODFINE MANAGEMENT CORP.</strong> ("Woodfine") has introduced PointSav Digital Systems™ ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter"). PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer.</p>
-
-            <p>PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
-
-            <h2>The Three-Track System</h2>
-            <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network™, Totebox Orchestration™, and PointSav Workplace OS™:</p>
-
-            <ul>
-                <li><strong>1. Private Network:</strong> A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet. It is built to work across bare metal servers or leased cloud deployments without requiring translation.</li>
-                <li><strong>2. Orchestration:</strong> At the center of the system are distinct, independent data vaults known as Totebox Archives™. For Woodfine, these are being deployed in three primary configurations that compliment one another to form a complete operational package:
-                    <ul>
-                        <li><strong>Personnel Archives</strong> are provisioned for individual operators, establishing a dedicated and legally segregated data environment. This architecture is designed to ensure strict accountability, streamline compliance and audit processes, and provide secure data portability across the lifecycle of an individual's tenure.</li>
-                        <li><strong>Corporate Archives</strong> manage the foundational records of a business entity. By physically isolating the governance, operations, and financial records of distinct limited companies, holding companies, and flow-through vehicles, the system inherently protects against data contamination and enforces clear liability boundaries.</li>
-                        <li><strong>Property Archives</strong> serve as the digital record for physical buildings, bringing floor plans, HVAC logs, and sensor data into one traceable structure for true cyberphysical connectivity.</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <p>Together, these three archives are architected to constitute a true "Digital Twin." While the industry frequently applies this term to superficial monitoring dashboards, PointSav aims to deliver a structurally verifiable replica of the entire enterprise—fusing physical infrastructure, corporate governance, and human operations into a single operational truth.</p>
-
-            <p>Every Totebox Archive is anchored to a universal real-world identifier, such as a National Identity Number, a Corporate Tax Identifier, or a National Land Registry Code, ensuring absolute jurisdictional compliance. While Woodfine utilizes this architecture for real estate, the system is designed for any highly regulated industry. Law firms can provision isolated archives for individual corporate entities or clients, and healthcare providers can deploy them for individual patients to ensure absolute data segregation.</p>
-
-            <ul>
-                <li><strong>3. Workplace OS:</strong> PointSav is developing a complete desktop environment for the operator. It is a secure interface that completely removes the need for web-based subscriptions. When operators write documents, send communications, or log records, the desktop environment outputs deterministic, machine-readable files, not hidden database entries.</li>
-            </ul>
-
-            <h2>The PointSav Command Centre™</h2>
-            <p>Instead of relying on fragile third-party integrations, the architecture utilizes a PointSav Command Centre gateway. This gateway is engineered to safely aggregate the information from the different Totebox Archives into one secure administrative view. Commands move downstream to the buildings; diagnostics and records return upstream to central monitoring.</p>
-
-            <h2>Public Technical Disclosure & Structural Compliance</h2>
-            <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). <em>This release serves as a public disclosure establishing prior art for the PointSav architecture.</em> The architecture achieves compliance not through policy, but by hardcoding Six Orchestration Contracts (Audit Record, Health Report, Export Manifest, Version Lineage, Pairing Attestation, and Cross-Reference Anchor) into a proprietary no_std Rust Capability-Based Manager. This Root-Task operates at the microkernel level, running specific workloads within completely Isolated Protection Domains.</p>
-
-            <p>Furthermore, the system rejects legacy password architectures in favor of Machine-Based Authorization, utilizing hardware pairing as the sole mechanism for permission and access control. To prevent external intrusion, the architecture enforces the Diode Standard—a universal one-way command flow from startpoints to endpoints that blocks upstream vulnerabilities by design. Because the data vaults are deployed as encrypted, portable unikernels, the software logic is permanently decoupled from the physical metal, forcing a unified, machine-readable format across any hardware environment.</p>
-
-            <h2>The Economic Model</h2>
-            <p>Owners receive a clear offer: a single integration cost per building, structured over a contract. This includes onboarding, hardware pairing, and network enablement. Ongoing support fits into standard maintenance budgets. The economic model avoids per-seat pricing or software bloat. It is infrastructure, not overhead.</p>
-
-            <div class="contact-block">
-                <strong>Contact For Further Information</strong>
-                Peter M. Woodfine<br>
-                Executive Officer<br>
-                Woodfine Management Corp.<br>
-                595 Burrard Street, Lower Concourse<br>
-                PO BOX 48295 Bentall<br>
-                Vancouver, BC V7X 1A1<br>
-                +1 604-375-1196<br>
-                <a href="mailto:peter@woodfine.co">peter@woodfine.co</a><br>
-                <a href="https://www.woodfine.co">www.woodfine.co</a>
-            </div>
-        </section>
-
-        <section class="legal-block">
+<div class="site-wrapper">
+    <div class="top-nav">
+        <span>System Architecture Disclosure</span>
+        <a href="https://github.com/pointsav" target="_blank">
+            <svg height="20" aria-hidden="true" viewBox="0 0 16 16" width="20" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            View OS Monorepo
+        </a>
+    </div>
+    <div class="container" id="sovereign-payload">
+        <h1>POINTSAV DIGITAL SYSTEMS™</h1>
+        <h2 class="subtitle">Media Release</h2>
+        <p><strong>PointSav Digital Systems Introduces the "Digital First" Operating System for Real Estate Infrastructure</strong></p>
+        <div class="dateline">FOR IMMEDIATE RELEASE &nbsp;|&nbsp; VANCOUVER, BC &nbsp;|&nbsp; MARCH 2, 2026</div>
+        <p><strong>WOODFINE MANAGEMENT CORP.</strong> ("Woodfine") has introduced PointSav Digital Systems™ ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter"). PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer.</p>
+        <p>PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
+        <h2>The Three-Track System</h2>
+        <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network™, Totebox Orchestration™, and PointSav Workplace OS™:</p>
+        <ul>
+            <li><strong>1. Private Network:</strong> A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet. It is built to work across bare metal servers or leased cloud deployments without requiring translation.</li>
+            <li><strong>2. Orchestration:</strong> At the center of the system are distinct, independent data vaults known as Totebox Archives™. For Woodfine, these are being deployed in three primary configurations that compliment one another to form a complete operational package:
+                <ul>
+                    <li><strong>Personnel Archives</strong> are provisioned for individual operators, establishing a dedicated and legally segregated data environment. This architecture is designed to ensure strict accountability, streamline compliance and audit processes, and provide secure data portability across the lifecycle of an individual's tenure.</li>
+                    <li><strong>Corporate Archives</strong> manage the foundational records of a business entity. By physically isolating the governance, operations, and financial records of distinct limited companies, holding companies, and flow-through vehicles, the system inherently protects against data contamination and enforces clear liability boundaries.</li>
+                    <li><strong>Property Archives</strong> serve as the digital record for physical buildings, bringing floor plans, HVAC logs, and sensor data into one traceable structure for true cyberphysical connectivity.</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Together, these three archives are architected to constitute a true "Digital Twin." While the industry frequently applies this term to superficial monitoring dashboards, PointSav aims to deliver a structurally verifiable replica of the entire enterprise—fusing physical infrastructure, corporate governance, and human operations into a single operational truth.</p>
+        <p>Every Totebox Archive is anchored to a universal real-world identifier, such as a National Identity Number, a Corporate Tax Identifier, or a National Land Registry Code, ensuring absolute jurisdictional compliance. While Woodfine utilizes this architecture for real estate, the system is designed for any highly regulated industry. Law firms can provision isolated archives for individual corporate entities or clients, and healthcare providers can deploy them for individual patients to ensure absolute data segregation.</p>
+        <ul>
+            <li><strong>3. Workplace OS:</strong> PointSav is developing a complete desktop environment for the operator. It is a secure interface that completely removes the need for web-based subscriptions. When operators write documents, send communications, or log records, the desktop environment outputs deterministic, machine-readable files, not hidden database entries.</li>
+        </ul>
+        <h2>The PointSav Command Centre™</h2>
+        <p>Instead of relying on fragile third-party integrations, the architecture utilizes a PointSav Command Centre gateway. This gateway is engineered to safely aggregate the information from the different Totebox Archives into one secure administrative view. Commands move downstream to the buildings; diagnostics and records return upstream to central monitoring.</p>
+        <h2>Public Technical Disclosure & Structural Compliance</h2>
+        <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). <em>This release serves as a public disclosure establishing prior art for the PointSav architecture.</em> The architecture achieves compliance not through policy, but by hardcoding Six Orchestration Contracts (Audit Record, Health Report, Export Manifest, Version Lineage, Pairing Attestation, and Cross-Reference Anchor) into a proprietary no_std Rust Capability-Based Manager. This Root-Task operates at the microkernel level, running specific workloads within completely Isolated Protection Domains.</p>
+        <p>Furthermore, the system rejects legacy password architectures in favor of Machine-Based Authorization, utilizing hardware pairing as the sole mechanism for permission and access control. To prevent external intrusion, the architecture enforces the Diode Standard—a universal one-way command flow from startpoints to endpoints that blocks upstream vulnerabilities by design. Because the data vaults are deployed as encrypted, portable unikernels, the software logic is permanently decoupled from the physical metal, forcing a unified, machine-readable format across any hardware environment.</p>
+        <h2>The Economic Model</h2>
+        <p>Owners receive a clear offer: a single integration cost per building, structured over a contract. This includes onboarding, hardware pairing, and network enablement. Ongoing support fits into standard maintenance budgets. The economic model avoids per-seat pricing or software bloat. It is infrastructure, not overhead.</p>
+        <div class="legal-block">
             <h3>Multi-Jurisdictional Securities Laws</h3>
             <p>Shares in the Promoter, Investment Units in the Direct-Hold Solutions, and any related financial instruments have not been, and will not be, registered under the United States Securities Act of 1933, as amended, nor under the securities laws of Canada, the <em>Ley del Mercado de Valores</em> of Mexico, or the <em>Ley de los Mercados de Valores</em> of Spain. They may not be offered or sold in these jurisdictions absent registration or an applicable exemption from registration requirements. This release does not constitute an offer to sell or the solicitation of an offer to buy. There will be no sale of shares or Investment Units in any province, state, or jurisdiction in which such offer, solicitation, or sale would be unlawful prior to registration or qualification under applicable securities laws and regulations.</p>
-
             <h3>Continuous Disclosure and Forward-Looking Statements</h3>
             <p>This release contains forward-looking information within the meaning of applicable international securities legislation, including National Instrument 51-102 <em>Continuous Disclosure Obligations</em> in Canada, and equivalent regulatory frameworks governing real estate investment vehicles and Direct-Hold Solutions globally. Forward-looking information in this release includes, but is not limited to, statements regarding the integration timeline, cost structures, operational capabilities of the PointSav architecture, and the anticipated compliance benefits (SOC 3 and DARP). These statements are based on the expectations and assumptions made by the management of the Promoter, Woodfine, and the Direct-Hold Solutions, specifically the assumption that deployment to hardware endpoints will proceed without supply chain disruptions and that the cryptographic isolation of the Totebox Archives will continue to meet regulatory standards across North American and European jurisdictions. Actual results, performance, and plans can differ materially from those anticipated due to a number of material risk factors, including but not limited to, changes in global privacy and real estate syndication regulations, unforeseen technical limitations in legacy infrastructure, and delays in the deployment of the private network. The Promoter, Woodfine, the Direct-Hold Solutions, and management disclaim any intention or obligation to revise any forward-looking statements, whether as a result of new information, future events, or otherwise, except as required pursuant to applicable securities legislation.</p>
-        </section>
+        </div>
     </div>
+    <div class="crypto-footer">
+        <span>INFRASTRUCTURE ROUTING: DNS via DreamHost | Edge Delivery via GitHub Pages</span>
+        <span id="crypto-stamp">CRYPTOGRAPHIC VERIFICATION: Initiating SHA-256 Checksum...</span>
+    </div>
+</div>
+<script>
+    async function generateHash() {
+        const payload = document.getElementById('sovereign-payload').innerText;
+        const msgBuffer = new TextEncoder().encode(payload);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        const stamp = document.getElementById('crypto-stamp');
+        stamp.innerText = `SHA-256 ANCHOR: ${hashHex} | ${new Date().toISOString()}`;
+        stamp.style.color = "var(--ps-white)";
+    }
+    window.onload = generateHash;
+</script>
 </body>
 </html>
