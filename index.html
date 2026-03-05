@@ -6,50 +6,64 @@
     <title>PointSav Digital Systems™ - Corporate Disclosure</title>
     <style>
         :root {
-            --ps-black: #000000; --ps-grey-dark: #292929; --ps-grey-light: #A3A3A3; --ps-white: #ffffff;
+            --ps-accent: #869FB9; /* Woodfine Blue Shade 3 */
+            --ps-bg: #1A1A1A;     /* Soft Dark Base */
+            --ps-card: #292929;   /* Woodfine Black Shade 1 */
+            --ps-text: #EAEBEC;   /* Woodfine Grey Shade 1 */
+            --ps-muted: #A3A3A3;  /* Woodfine Black Shade 4 */
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         }
-        body { font-family: var(--font-sans); background-color: var(--ps-black); color: var(--ps-grey-light); line-height: 1.6; margin: 0; padding: 0; display: flex; justify-content: center; }
+        body { font-family: var(--font-sans); background-color: var(--ps-bg); color: var(--ps-text); line-height: 1.6; margin: 0; padding: 0; display: flex; justify-content: center; }
         
         /* ZERO-EXECUTION TOGGLE LOGIC */
         #lang-toggle { display: none; }
+        .lang-en, .btn-en, .hash-en { display: block; }
         .lang-es, .btn-es, .hash-es { display: none; }
-        #lang-toggle:checked ~ .site-wrapper .lang-en { display: none; }
-        #lang-toggle:checked ~ .site-wrapper .btn-en { display: none; }
+        #lang-toggle:checked ~ .site-wrapper .lang-en,
+        #lang-toggle:checked ~ .site-wrapper .btn-en,
         #lang-toggle:checked ~ .site-wrapper .hash-en { display: none; }
-        #lang-toggle:checked ~ .site-wrapper .lang-es { display: block; }
-        #lang-toggle:checked ~ .site-wrapper .btn-es { display: inline; }
+        #lang-toggle:checked ~ .site-wrapper .lang-es,
         #lang-toggle:checked ~ .site-wrapper .hash-es { display: block; }
+        #lang-toggle:checked ~ .site-wrapper .btn-es { display: inline-block; }
 
         .site-wrapper { max-width: 800px; width: 100%; margin: 40px 20px; }
-        .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ps-grey-light); }
-        .top-nav-links { display: flex; align-items: center; gap: 15px; }
-        .top-nav a { color: var(--ps-white); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600; }
-        .top-nav a:hover { color: var(--ps-grey-light); }
-        .lang-toggle-btn { background: transparent; border: 1px solid currentColor; color: var(--ps-white); padding: 4px 8px; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer; border-radius: 3px; font-weight: 600; user-select: none; }
-        .lang-toggle-btn:hover { background: var(--ps-white); color: var(--ps-black); }
-        .container { background: var(--ps-grey-dark); padding: 50px 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); border-top: 6px solid var(--ps-white); }
-        h1, h2, h3 { color: var(--ps-white); font-weight: 600; }
-        h1 { font-size: 1.8rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
-        .subtitle { font-size: 1.2rem; font-weight: 500; margin-top: 0; margin-bottom: 20px; color: var(--ps-white); }
-        .dateline { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ps-grey-light); margin-bottom: 30px; border-bottom: 1px solid #000000; padding-bottom: 15px; }
+        .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ps-muted); }
+        .top-nav-links { display: flex; align-items: center; gap: 16px; }
+        .top-nav a { color: var(--ps-text); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600; transition: color 0.2s; }
+        .top-nav a:hover { color: var(--ps-accent); }
+        
+        .lang-toggle-btn { 
+            display: inline-flex; align-items: center; justify-content: center;
+            height: 28px; padding: 0 12px; font-family: var(--font-mono); font-size: 0.7rem; 
+            font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; 
+            border: 1px solid var(--ps-muted); border-radius: 14px; 
+            color: var(--ps-text); cursor: pointer; user-select: none; transition: all 0.2s ease; line-height: 1;
+        }
+        .lang-toggle-btn:hover { border-color: var(--ps-accent); color: var(--ps-accent); background: rgba(134, 159, 185, 0.1); }
+        
+        .container { background: var(--ps-card); padding: 56px 64px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border-top: 3px solid var(--ps-accent); border-radius: 4px; }
+        h1, h2, h3 { color: var(--ps-text); font-weight: 600; }
+        h1 { font-size: 1.8rem; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.02em; }
+        .subtitle { font-size: 1.2rem; font-weight: 500; margin-top: 0; margin-bottom: 24px; color: var(--ps-text); }
+        .dateline { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ps-muted); margin-bottom: 32px; border-bottom: 1px solid #525252; padding-bottom: 16px; }
         p { margin-bottom: 20px; text-align: justify; }
         ul { margin-top: 0; margin-bottom: 24px; padding-left: 24px; }
         li ul { margin-top: 16px; }
         li { margin-bottom: 12px; }
-        strong { color: var(--ps-white); font-weight: 600; }
-        .legal-block { margin-top: 50px; padding-top: 20px; border-top: 2px solid #000000; font-size: 0.85rem; color: var(--ps-grey-light); text-align: left; }
-        .legal-block h3 { font-size: 1rem; color: var(--ps-grey-light); margin-bottom: 10px; }
-        .crypto-footer { margin-top: 20px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-grey-light); text-align: center; line-height: 1.8; }
-        .crypto-footer span { display: block; }
-        .hash-string { color: var(--ps-white); }
-        @media (max-width: 600px) { .container { padding: 30px 20px; } h1 { font-size: 1.5rem; } }
+        strong { color: var(--ps-text); font-weight: 600; }
+        
+        .legal-block { margin-top: 56px; padding-top: 24px; border-top: 1px solid #525252; font-size: 0.85rem; color: var(--ps-muted); text-align: left; }
+        .legal-block h3 { font-size: 1rem; color: var(--ps-muted); margin-bottom: 12px; }
+        
+        .crypto-footer { margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-muted); text-align: center; line-height: 2; }
+        .hash-string { background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px; color: var(--ps-accent); }
+        
+        @media (max-width: 600px) { .container { padding: 32px 24px; } h1 { font-size: 1.5rem; } .top-nav { flex-direction: column; align-items: flex-start; gap: 16px; } }
     </style>
 </head>
 <body>
 <input type="checkbox" id="lang-toggle">
-
 <div class="site-wrapper">
     <div class="top-nav">
         <span>System Architecture Disclosure</span>
@@ -66,8 +80,7 @@
             </label>
         </div>
     </div>
-    <div class="container" id="sovereign-payload">
-        
+    <div class="container">
         <div class="lang-en">
             <h1>POINTSAV DIGITAL SYSTEMS™</h1>
             <h2 class="subtitle">Media Release</h2>
@@ -111,10 +124,11 @@
             </div>
         </div>
     </div>
+    
     <div class="crypto-footer">
-        <span>INFRASTRUCTURE ROUTING: DNS via DreamHost | Static Hosting via GitHub Pages</span>
-        <span class="hash-en">PRE-COMPUTED SHA-256 (EN): <span class="hash-string">f7b2e185a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c2d</span> | COMPILER: service-content</span>
-        <span class="hash-es">PRE-COMPUTED SHA-256 (ES): <span class="hash-string">e9d84e185a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c</span> | COMPILER: service-content</span>
+        <div>INFRASTRUCTURE ROUTING: DNS via DreamHost | Static Hosting via GitHub Pages</div>
+        <div class="hash-en">PRE-COMPUTED SHA-256 (EN): <span class="hash-string">f7b2e185a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c2d</span> | COMPILER: service-content</div>
+        <div class="hash-es">PRE-COMPUTED SHA-256 (ES): <span class="hash-string">e9d84e185a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c</span> | COMPILER: service-content</div>
     </div>
 </div>
 </body>
