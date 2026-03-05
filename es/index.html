@@ -7,65 +7,78 @@
     <style>
         :root {
             --ps-accent: #869FB9;
-            --ps-bg: #1A1A1A;
-            --ps-card: #292929;
-            --ps-text: #EAEBEC;
-            --ps-muted: #A3A3A3;
+            --ps-bg: #FFFFFF;
+            --ps-text: #09090B;
+            --ps-muted: #6B7280;
+            --ps-border: #E5E7EB;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         }
         body { font-family: var(--font-sans); background-color: var(--ps-bg); color: var(--ps-text); line-height: 1.6; margin: 0; padding: 0; display: flex; justify-content: center; }
         
         .site-wrapper { max-width: 800px; width: 100%; margin: 40px 20px; }
-        .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ps-muted); }
-        .top-nav-links { display: flex; align-items: center; gap: 12px; }
+        
+        /* NAVIGATION */
+        .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; font-family: var(--font-mono); font-size: clamp(0.7rem, 1.5vw, 0.8rem); text-transform: uppercase; letter-spacing: 0.05em; color: var(--ps-muted); border-bottom: 1px solid var(--ps-border); padding-bottom: 24px; }
+        .top-nav-links { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .top-nav a { color: var(--ps-text); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 600; transition: color 0.2s; }
         .top-nav a:hover { color: var(--ps-accent); }
         
-        .pill-btn { 
+        /* TOUCH TARGET BUTTONS (Hyperscaler Square Aesthetic) */
+        .sys-btn { 
             display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            height: 28px; padding: 0 12px; font-family: var(--font-mono); font-size: 0.7rem; 
+            min-height: 44px; padding: 0 16px; font-family: var(--font-mono); font-size: clamp(0.7rem, 1.5vw, 0.75rem); 
             font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; 
-            border: 1px solid var(--ps-muted); border-radius: 14px; 
-            color: var(--ps-text); cursor: pointer; user-select: none; transition: all 0.2s ease; line-height: 1; text-decoration: none;
+            border: 1px solid var(--ps-border); border-radius: 4px; 
+            color: var(--ps-text); cursor: pointer; user-select: none; transition: all 0.2s ease; line-height: 1; text-decoration: none; background: transparent;
         }
-        .pill-btn:hover { border-color: var(--ps-accent); color: var(--ps-accent); background: rgba(134, 159, 185, 0.1); }
+        .sys-btn:hover { border-color: var(--ps-text); background: rgba(9, 9, 11, 0.03); }
+        .print-btn { border-color: transparent; }
+        .print-btn:hover { border-color: var(--ps-border); }
         
-        .container { background: var(--ps-card); padding: 56px 64px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border-top: 3px solid var(--ps-accent); border-radius: 4px; }
-        h1, h2, h3 { color: var(--ps-text); font-weight: 600; }
-        h1 { font-size: 1.8rem; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.02em; }
-        .subtitle { font-size: 1.2rem; font-weight: 500; margin-top: 0; margin-bottom: 24px; color: var(--ps-text); }
-        .dateline { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ps-muted); margin-bottom: 32px; border-bottom: 1px solid #525252; padding-bottom: 16px; }
-        p { margin-bottom: 20px; text-align: justify; }
-        ul { margin-top: 0; margin-bottom: 24px; padding-left: 24px; }
-        li ul { margin-top: 16px; }
-        li { margin-bottom: 12px; }
+        /* DOCUMENT CANVAS (Borderless Monolith) */
+        .container { background: var(--ps-bg); padding: clamp(16px, 3vw, 32px) 0; }
+        .logo-header { margin-bottom: 48px; }
+        .logo-header img { max-width: 300px; width: 100%; height: auto; display: block; }
+        
+        /* FLUID TYPOGRAPHY & NEURODIVERSITY */
+        h1, h2, h3 { color: var(--ps-text); font-weight: 600; line-height: 1.2; text-align: left; }
+        h1 { font-size: clamp(1.5rem, 4vw, 1.8rem); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.02em; }
+        .subtitle { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 500; margin-top: 0; margin-bottom: 24px; color: var(--ps-muted); }
+        p { margin-bottom: 20px; font-size: clamp(0.875rem, 1.5vw, 1rem); max-width: 80ch; text-align: left; text-wrap: pretty; }
         strong { color: var(--ps-text); font-weight: 600; }
         
-        .legal-block { margin-top: 56px; padding-top: 24px; border-top: 1px solid #525252; font-size: 0.85rem; color: var(--ps-muted); text-align: left; }
-        .legal-block h3 { font-size: 1rem; color: var(--ps-muted); margin-bottom: 12px; }
+        /* LEGAL BLOCKS */
+        .legal-block { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--ps-border); font-size: clamp(0.75rem, 1.5vw, 0.85rem); color: var(--ps-muted); }
+        .legal-block h3 { font-size: 1rem; color: var(--ps-text); margin-bottom: 12px; }
+        .legal-block p { color: var(--ps-muted); }
         
-        .crypto-footer { margin-top: 32px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--ps-muted); text-align: center; line-height: 2.2; border-top: 1px solid #525252; padding-top: 24px; }
-        .hash-string { color: var(--ps-accent); font-weight: 600; word-break: break-all; }
+        /* FOOTER */
+        .crypto-footer { margin-top: 32px; font-family: var(--font-mono); font-size: clamp(0.65rem, 1.2vw, 0.7rem); color: var(--ps-muted); text-align: center; line-height: 2.2; border-top: 1px solid var(--ps-border); padding-top: 24px; }
+        .hash-string { color: var(--ps-text); font-weight: 600; word-break: break-all; }
         
-        @media (max-width: 600px) { .container { padding: 32px 24px; } h1 { font-size: 1.5rem; } .top-nav { flex-direction: column; align-items: flex-start; gap: 16px; } }
+        /* THE PRINT ENGINE */
+        @media print {
+            body { background-color: #FFFFFF; color: #000000; }
+            .top-nav, .crypto-footer, .sys-btn, input, label { display: none !important; }
+            .site-wrapper { margin: 0; max-width: 100%; }
+            .container { padding: 0; margin: 0; }
+            @page { margin: 1in; }
+        }
 
-        /* ZERO-EXECUTION TOGGLE LOGIC (Locked at bottom for absolute CSS priority) */
+        /* ZERO-EXECUTION TOGGLE LOGIC */
         #lang-toggle { display: none; }
         
-        .lang-en, .hash-en { display: block; }
+        .lang-en { display: block; }
         .btn-en, .dl-en { display: inline-flex; }
-        
-        .lang-es, .hash-es { display: none; }
+        .lang-es { display: none; }
         .btn-es, .dl-es { display: none; }
         
-        #lang-toggle:checked ~ .site-wrapper .lang-en,
-        #lang-toggle:checked ~ .site-wrapper .hash-en { display: none; }
+        #lang-toggle:checked ~ .site-wrapper .lang-en { display: none; }
         #lang-toggle:checked ~ .site-wrapper .btn-en,
         #lang-toggle:checked ~ .site-wrapper .dl-en { display: none; }
         
-        #lang-toggle:checked ~ .site-wrapper .lang-es,
-        #lang-toggle:checked ~ .site-wrapper .hash-es { display: block; }
+        #lang-toggle:checked ~ .site-wrapper .lang-es { display: block; }
         #lang-toggle:checked ~ .site-wrapper .btn-es,
         #lang-toggle:checked ~ .site-wrapper .dl-es { display: inline-flex; }
     </style>
@@ -81,50 +94,50 @@
                 System Architecture
             </a>
             
-            <a href="/pointsav_media_release_en.pdf" class="pill-btn dl-en" download>
+            <button onclick="window.print()" class="sys-btn print-btn">
+                <svg height="14" viewBox="0 0 16 16" width="14" fill="currentColor"><path d="M4 1.5C4 .67 4.67 0 5.5 0h5c.83 0 1.5.67 1.5 1.5V4h2.5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5h-1.5v2.5c0 .83-.67 1.5-1.5 1.5h-6c-.83 0-1.5-.67-1.5-1.5V12H2.5C1.67 12 1 11.33 1 10.5v-5C1 4.67 1.67 4 2.5 4H4V1.5zM5.5 1.5v2.5h5V1.5h-5zm-3 4v5h1.5V8.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5v2h1.5v-5h-11zm3 8h5v-5h-5v5z"></path></svg> PRINT
+            </button>
+
+            <a href="/pointsav_media_release_en.pdf" class="sys-btn dl-en" download>
                 <svg height="14" viewBox="0 0 16 16" width="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM8 1.75v8.5l-2.72-2.72a.75.75 0 00-1.06 1.06l4 4a.75.75 0 001.06 0l4-4a.75.75 0 10-1.06-1.06L8.75 10.25v-8.5a.75.75 0 00-1.5 0z"></path></svg> PDF
             </a>
-            <a href="/pointsav_media_release_en.pdf" class="pill-btn dl-es" download>
+            <a href="/pointsav_media_release_en.pdf" class="sys-btn dl-es" download>
                 <svg height="14" viewBox="0 0 16 16" width="14" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM8 1.75v8.5l-2.72-2.72a.75.75 0 00-1.06 1.06l4 4a.75.75 0 001.06 0l4-4a.75.75 0 10-1.06-1.06L8.75 10.25v-8.5a.75.75 0 00-1.5 0z"></path></svg> PDF
             </a>
 
-            <label for="lang-toggle" class="pill-btn">
+            <label for="lang-toggle" class="sys-btn">
                 <span class="btn-en">ESPAÑOL</span>
                 <span class="btn-es">ENGLISH</span>
             </label>
         </div>
     </div>
-    <div class="container">
-        <div class="lang-en">
-            <h1>POINTSAV DIGITAL SYSTEMS™</h1>
-            <h2 class="subtitle">Media Release</h2>
-            <p><strong>PointSav Digital Systems Introduces the "Digital First" Operating System for Real Estate Infrastructure</strong></p>
-            <div class="dateline">FOR IMMEDIATE RELEASE &nbsp;|&nbsp; VANCOUVER, BC &nbsp;|&nbsp; MARCH 2, 2026</div>
-            <p><strong>WOODFINE MANAGEMENT CORP.</strong> ("Woodfine") has introduced PointSav Digital Systems™ ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter"). PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer.</p>
-            <p>PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
-            <h2>The Three-Track System</h2>
-            <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network™, Totebox Orchestration™, and PointSav Workplace OS™:</p>
-            <p><strong>1. Private Network:</strong> A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet.</p>
-            <p><strong>2. Orchestration:</strong> At the center of the system are distinct, independent data vaults known as Totebox Archives™. For Woodfine, these are deployed in three primary configurations: Personnel Archives, Corporate Archives, and Property Archives, ensuring absolute data segregation.</p>
-            <p><strong>3. Workplace OS:</strong> A secure desktop environment that outputs deterministic, machine-readable files, not hidden database entries.</p>
-            <h2>Public Technical Disclosure & Structural Compliance</h2>
-            <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). <em>This release serves as a public disclosure establishing prior art for the PointSav architecture.</em> The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary `no_std` Rust Capability-Based Manager.</p>
+    <div class="container" id="document-content">
+        <div class="logo-header">
+            <img src="https://raw.githubusercontent.com/pointsav/pointsav-media-assets/main/logos/PointSav%20Logo_Earth_Logo_Large.png" alt="PointSav Digital Systems">
         </div>
-
+        
+        <div class="lang-en">
+            <p><strong>FOR IMMEDIATE RELEASE</strong><br><strong>PointSav Digital Systems Introduces the "Digital First" Operating System for Real Estate Infrastructure</strong><br><strong>VANCOUVER, BC &mdash; March 2, 2026 &mdash;</strong> WOODFINE MANAGEMENT CORP. ("Woodfine") has introduced PointSav Digital Systems&trade; ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter"). PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer.</p>
+            <p>PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
+            <h3>The Three-Track System</h3>
+            <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network&trade;, Totebox Orchestration&trade;, and PointSav Workplace OS&trade;:</p>
+            <p><strong>1. Private Network:</strong> A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet.</p>
+            <p><strong>2. Orchestration:</strong> At the center of the system are distinct, independent data vaults known as Totebox Archives&trade;. For Woodfine, these are deployed in three primary configurations: Personnel Archives, Corporate Archives, and Property Archives, ensuring absolute data segregation.</p>
+            <p><strong>3. Workplace OS:</strong> A secure desktop environment that outputs deterministic, machine-readable files, not hidden database entries.</p>
+            <h3>Public Technical Disclosure & Structural Compliance</h3>
+            <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). <em>This release serves as a public disclosure establishing prior art for the PointSav architecture.</em> The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary <code>no_std</code> Rust Capability-Based Manager.</p>
+        </div>
+        
         <div class="lang-es">
-            <h1>POINTSAV DIGITAL SYSTEMS™</h1>
-            <h2 class="subtitle">Comunicado de Prensa</h2>
-            <p><strong>PointSav Digital Systems Presenta el Sistema Operativo de "Prioridad Digital" para la Infraestructura Inmobiliaria</strong></p>
-            <div class="dateline">PARA PUBLICACIÓN INMEDIATA &nbsp;|&nbsp; VANCOUVER, BC &nbsp;|&nbsp; 2 DE MARZO DE 2026</div>
-            <p><strong>WOODFINE MANAGEMENT CORP.</strong> ("Woodfine") ha introducido PointSav Digital Systems™ ("PointSav") como una nueva subsidiaria de infraestructura digital de Woodfine Capital Projects Inc. (el "Promotor"). PointSav sirve como la arquitectura fundamental del sistema operativo para Woodfine, su administrador y primer cliente.</p>
+            <p><strong>PARA PUBLICACIÓN INMEDIATA</strong><br><strong>PointSav Digital Systems Presenta el Sistema Operativo de "Prioridad Digital" para la Infraestructura Inmobiliaria</strong><br><strong>VANCOUVER, BC &mdash; 2 DE MARZO DE 2026 &mdash;</strong> WOODFINE MANAGEMENT CORP. ("Woodfine") ha introducido PointSav Digital Systems&trade; ("PointSav") como una nueva subsidiaria de infraestructura digital de Woodfine Capital Projects Inc. (el "Promotor"). PointSav sirve como la arquitectura fundamental del sistema operativo para Woodfine, su administrador y primer cliente.</p>
             <p>PointSav no es una plataforma de software como servicio (SaaS). Es una arquitectura de sistema operativo diseñada para otorgar a los operadores de edificios propiedad directa, seguridad a largo plazo y control independiente sobre sus activos y datos físicos.</p>
-            <h2>El Sistema de Tres Vías</h2>
-            <p>PointSav abandona el modelo tradicional de alquilar bases de datos en la nube. En su lugar, está desplegando activamente una Arquitectura de 3 Vías que comprende la Red Privada PointSav™, la Orquestación Totebox™ y el SO de Lugar de Trabajo PointSav™:</p>
+            <h3>El Sistema de Tres Vías</h3>
+            <p>PointSav abandona el modelo tradicional de alquilar bases de datos en la nube. En su lugar, está desplegando activamente una Arquitectura de 3 Vías que comprende la Red Privada PointSav&trade;, la Orquestación Totebox&trade; y el SO de Lugar de Trabajo PointSav&trade;:</p>
             <p><strong>1. Red Privada:</strong> Una capa de enrutamiento segura diseñada para conectar edificios físicos y bóvedas de datos aisladas a los centros de comando sin exponer los datos a la Internet pública.</p>
-            <p><strong>2. Orquestación:</strong> En el centro del sistema se encuentran bóvedas de datos independientes llamadas Archivos Totebox™. Para Woodfine, se despliegan en tres configuraciones principales: Archivos de Personal, Archivos Corporativos y Archivos de Propiedad, asegurando la segregación absoluta de los datos.</p>
+            <p><strong>2. Orquestación:</strong> En el centro del sistema se encuentran bóvedas de datos independientes llamadas Archivos Totebox&trade;. Para Woodfine, se despliegan en tres configuraciones principales: Archivos de Personal, Archivos Corporativos y Archivos de Propiedad, asegurando la segregación absoluta de los datos.</p>
             <p><strong>3. SO de Lugar de Trabajo:</strong> Un entorno de escritorio seguro que produce archivos deterministas legibles por máquina, no entradas de bases de datos ocultas.</p>
-            <h2>Divulgación Técnica Pública y Cumplimiento Estructural</h2>
-            <p>PointSav está diseñado para garantizar la confianza operativa (SOC 3) y la propiedad estructural de los datos (DARP). <em>Este comunicado sirve como una divulgación pública que establece la técnica anterior (prior art) para la arquitectura PointSav.</em> La arquitectura logra el cumplimiento al codificar Seis Contratos de Orquestación en un Gestor de Capacidades propietario en Rust `no_std`.</p>
+            <h3>Divulgación Técnica Pública y Cumplimiento Estructural</h3>
+            <p>PointSav está diseñado para garantizar la confianza operativa (SOC 3) y la propiedad estructural de los datos (DARP). <em>Este comunicado sirve como una divulgación pública que establece la técnica anterior (prior art) para la arquitectura PointSav.</em> La arquitectura logra el cumplimiento al codificar Seis Contratos de Orquestación en un Gestor de Capacidades propietario en Rust <code>no_std</code>.</p>
         </div>
 
         <div class="legal-block">
@@ -146,15 +159,43 @@
                 <p>Los resultados, el rendimiento y los planes reales pueden diferir materialmente de los previstos debido a una serie de factores de riesgo materiales, que incluyen, entre otros, cambios en las regulaciones globales de privacidad y sindicación inmobiliaria, limitaciones técnicas imprevistas en la infraestructura heredada y retrasos en el despliegue de la red privada.</p>
                 <p>El Promotor, Woodfine, las Soluciones de Tenencia Directa y la gerencia renuncian a cualquier intención u obligación de revisar cualquier declaración prospectiva, ya sea como resultado de nueva información, eventos futuros u otros, excepto según lo exija la legislación de valores aplicable.</p>
             </div>
+            <div class="lang-en" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--ps-border);">
+                <h3>Digital Infrastructure & Privacy Posture</h3>
+                <p>This interface operates on a Zero-Execution and Zero-State Telemetry architecture. It does not deploy tracking cookies, retain session states, or harvest Personally Identifiable Information (PII). System interactions are limited to the collection of anonymized, masked network routing data strictly for the purpose of auditing infrastructure security and verifying document access.</p>
+            </div>
+            <div class="lang-es" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--ps-border);">
+                <h3>Postura de Privacidad e Infraestructura Digital</h3>
+                <p>Esta interfaz opera con una arquitectura de Ejecución Cero y Telemetría de Estado Cero. No despliega cookies de seguimiento, no retiene estados de sesión ni recopila Información de Identificación Personal (PII). Las interacciones del sistema se limitan a la recopilación de datos de enrutamiento de red anonimizados y enmascarados estrictamente con el propósito de auditar la seguridad de la infraestructura y verificar el acceso a los documentos.</p>
+            </div>
         </div>
     </div>
     
     <div class="crypto-footer">
-        <div>INFRASTRUCTURE ROUTING: DNS via DreamHost &nbsp;|&nbsp; Static Hosting via GitHub Pages</div>
-        <div>COMPILER: service-content</div>
-        <div class="hash-en">PRE-COMPUTED SHA-256 (EN): <span class="hash-string">c8b4d9a3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c2d7b4e185a6</span></div>
-        <div class="hash-es">PRE-COMPUTED SHA-256 (ES): <span class="hash-string">a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c2d7b4e185f</span></div>
+        <div>INFRASTRUCTURE ROUTING: DNS via DreamHost &nbsp;|&nbsp; Edge Delivery via GitHub Pages</div>
+        <div>MATHEMATICAL CHECKSUM (SHA-256): <span id="live-hash" class="hash-string">CALCULATING...</span></div>
     </div>
 </div>
+
+<script>
+    // Live Cryptographic Engine (Native Web API)
+    async function updateHash() {
+        const isSpanish = document.getElementById('lang-toggle').checked;
+        const targetClass = isSpanish ? '.lang-es' : '.lang-en';
+        
+        // Target the active language content plus the specific translated privacy posture
+        const contentNodes = document.querySelectorAll('#document-content ' + targetClass + ', .legal-block > div' + targetClass);
+        let textToHash = '';
+        contentNodes.forEach(node => { textToHash += node.innerText; });
+        
+        const msgUint8 = new TextEncoder().encode(textToHash);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        document.getElementById('live-hash').innerText = hashHex;
+    }
+
+    document.getElementById('lang-toggle').addEventListener('change', updateHash);
+    window.addEventListener('DOMContentLoaded', updateHash);
+</script>
 </body>
 </html>
