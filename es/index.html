@@ -6,17 +6,16 @@
     <title>PointSav Digital Systems™ - Corporate Disclosure</title>
     <style>
         :root {
-            --ps-accent: #869FB9; /* Woodfine Blue Shade 3 */
-            --ps-bg: #1A1A1A;     /* Soft Dark Base */
-            --ps-card: #292929;   /* Woodfine Black Shade 1 */
-            --ps-text: #EAEBEC;   /* Woodfine Grey Shade 1 */
-            --ps-muted: #A3A3A3;  /* Woodfine Black Shade 4 */
+            --ps-accent: #869FB9;
+            --ps-bg: #1A1A1A;
+            --ps-card: #292929;
+            --ps-text: #EAEBEC;
+            --ps-muted: #A3A3A3;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         }
         body { font-family: var(--font-sans); background-color: var(--ps-bg); color: var(--ps-text); line-height: 1.6; margin: 0; padding: 0; display: flex; justify-content: center; }
         
-        /* ZERO-EXECUTION TOGGLE LOGIC */
         #lang-toggle { display: none; }
         .lang-en, .btn-en, .hash-en { display: block; }
         .lang-es, .btn-es, .hash-es { display: none; }
@@ -48,15 +47,10 @@
         .subtitle { font-size: 1.2rem; font-weight: 500; margin-top: 0; margin-bottom: 24px; color: var(--ps-text); }
         .dateline { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ps-muted); margin-bottom: 32px; border-bottom: 1px solid #525252; padding-bottom: 16px; }
         p { margin-bottom: 20px; text-align: justify; }
-        ul { margin-top: 0; margin-bottom: 24px; padding-left: 24px; }
-        li ul { margin-top: 16px; }
-        li { margin-bottom: 12px; }
-        strong { color: var(--ps-text); font-weight: 600; }
         
         .legal-block { margin-top: 56px; padding-top: 24px; border-top: 1px solid #525252; font-size: 0.85rem; color: var(--ps-muted); text-align: left; }
         .legal-block h3 { font-size: 1rem; color: var(--ps-muted); margin-bottom: 12px; }
         
-        /* REFINED FOOTER AESTHETICS */
         .crypto-footer { margin-top: 32px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--ps-muted); text-align: center; line-height: 2.2; border-top: 1px solid #525252; padding-top: 24px; }
         .hash-string { color: var(--ps-accent); font-weight: 600; word-break: break-all; }
         
@@ -97,6 +91,7 @@
             <h2>Public Technical Disclosure & Structural Compliance</h2>
             <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). <em>This release serves as a public disclosure establishing prior art for the PointSav architecture.</em> The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary `no_std` Rust Capability-Based Manager.</p>
         </div>
+
         <div class="lang-es">
             <h1>POINTSAV DIGITAL SYSTEMS™</h1>
             <h2 class="subtitle">Comunicado de Prensa</h2>
@@ -112,14 +107,25 @@
             <h2>Divulgación Técnica Pública y Cumplimiento Estructural</h2>
             <p>PointSav está diseñado para garantizar la confianza operativa (SOC 3) y la propiedad estructural de los datos (DARP). <em>Este comunicado sirve como una divulgación pública que establece la técnica anterior (prior art) para la arquitectura PointSav.</em> La arquitectura logra el cumplimiento al codificar Seis Contratos de Orquestación en un Gestor de Capacidades propietario en Rust `no_std`.</p>
         </div>
+
         <div class="legal-block">
             <div class="lang-en">
                 <h3>Multi-Jurisdictional Securities Laws</h3>
-                <p>Shares in the Promoter and any related financial instruments have not been, and will not be, registered under the United States Securities Act of 1933, as amended, nor under the securities laws of Canada, the Ley del Mercado de Valores of Mexico, or the Ley de los Mercados de Valores of Spain. This release does not constitute an offer to sell or the solicitation of an offer to buy.</p>
+                <p>Shares in the Promoter, Investment Units in the Direct-Hold Solutions, and any related financial instruments have not been, and will not be, registered under the United States Securities Act of 1933, as amended, nor under the securities laws of Canada, the Ley del Mercado de Valores of Mexico, or the Ley de los Mercados de Valores of Spain. They may not be offered or sold in these jurisdictions absent registration or an applicable exemption from registration requirements. This release does not constitute an offer to sell or the solicitation of an offer to buy. There will be no sale of shares or Investment Units in any province, state, or jurisdiction in which such offer, solicitation, or sale would be unlawful prior to registration or qualification under applicable securities laws and regulations.</p>
+                <h3>Continuous Disclosure and Forward-Looking Statements</h3>
+                <p>This release contains forward-looking information within the meaning of applicable international securities legislation, including National Instrument 51-102 Continuous Disclosure Obligations in Canada, and equivalent regulatory frameworks governing real estate investment vehicles and Direct-Hold Solutions globally.</p>
+                <p>Forward-looking information in this release includes, but is not limited to, statements regarding the integration timeline, cost structures, operational capabilities of the PointSav architecture, and the anticipated compliance benefits (SOC 3 and DARP). These statements are based on the expectations and assumptions made by the management of the Promoter, Woodfine, and the Direct-Hold Solutions, specifically the assumption that deployment to hardware endpoints will proceed without supply chain disruptions and that the cryptographic isolation of the Totebox Archives will continue to meet regulatory standards across North American and European jurisdictions.</p>
+                <p>Actual results, performance, and plans can differ materially from those anticipated due to a number of material risk factors, including but not limited to, changes in global privacy and real estate syndication regulations, unforeseen technical limitations in legacy infrastructure, and delays in the deployment of the private network.</p>
+                <p>The Promoter, Woodfine, the Direct-Hold Solutions, and management disclaim any intention or obligation to revise any forward-looking statements, whether as a result of new information, future events, or otherwise, except as required pursuant to applicable securities legislation.</p>
             </div>
             <div class="lang-es">
                 <h3>Leyes de Valores Multijurisdiccionales</h3>
-                <p>Las acciones del Promotor y cualquier instrumento financiero relacionado no han sido, ni serán, registrados bajo la Ley de Valores de los Estados Unidos de 1933, ni bajo las leyes de valores de Canadá, la Ley del Mercado de Valores de México, o la Ley de los Mercados de Valores de España. Este comunicado no constituye una oferta de venta ni la solicitud de una oferta de compra.</p>
+                <p>Las acciones del Promotor, las Unidades de Inversión en las Soluciones de Tenencia Directa y cualquier instrumento financiero relacionado no han sido, ni serán, registrados bajo la Ley de Valores de los Estados Unidos de 1933, ni bajo las leyes de valores de Canadá, la Ley del Mercado de Valores de México, o la Ley de los Mercados de Valores de España. No pueden ser ofrecidos ni vendidos en estas jurisdicciones sin registro o una exención aplicable. Este comunicado no constituye una oferta de venta ni la solicitud de una oferta de compra. No habrá venta de acciones o Unidades de Inversión en ninguna provincia, estado o jurisdicción en la que dicha oferta, solicitud o venta sea ilegal antes del registro o calificación bajo las leyes y regulaciones de valores aplicables.</p>
+                <h3>Divulgación Continua y Declaraciones Prospectivas</h3>
+                <p>Este comunicado contiene información prospectiva dentro del significado de la legislación internacional de valores aplicable, incluyendo el Instrumento Nacional 51-102 Obligaciones de Divulgación Continua en Canadá, y marcos regulatorios equivalentes que rigen los vehículos de inversión inmobiliaria y las Soluciones de Tenencia Directa a nivel mundial.</p>
+                <p>La información prospectiva en este comunicado incluye, entre otros, declaraciones sobre el cronograma de integración, las estructuras de costos, las capacidades operativas de la arquitectura PointSav y los beneficios de cumplimiento anticipados (SOC 3 y DARP). Estas declaraciones se basan en las expectativas y suposiciones hechas por la gerencia del Promotor, Woodfine y las Soluciones de Tenencia Directa, específicamente la suposición de que el despliegue en los puntos finales de hardware procederá sin interrupciones en la cadena de suministro y que el aislamiento criptográfico de los Archivos Totebox continuará cumpliendo con los estándares regulatorios en las jurisdicciones de América del Norte y Europa.</p>
+                <p>Los resultados, el rendimiento y los planes reales pueden diferir materialmente de los previstos debido a una serie de factores de riesgo materiales, que incluyen, entre otros, cambios en las regulaciones globales de privacidad y sindicación inmobiliaria, limitaciones técnicas imprevistas en la infraestructura heredada y retrasos en el despliegue de la red privada.</p>
+                <p>El Promotor, Woodfine, las Soluciones de Tenencia Directa y la gerencia renuncian a cualquier intención u obligación de revisar cualquier declaración prospectiva, ya sea como resultado de nueva información, eventos futuros u otros, excepto según lo exija la legislación de valores aplicable.</p>
             </div>
         </div>
     </div>
@@ -127,8 +133,8 @@
     <div class="crypto-footer">
         <div>INFRASTRUCTURE ROUTING: DNS via DreamHost &nbsp;|&nbsp; Static Hosting via GitHub Pages</div>
         <div>COMPILER: service-content</div>
-        <div class="hash-en">PRE-COMPUTED SHA-256 (EN): <span class="hash-string">f7b2e185a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c2d</span></div>
-        <div class="hash-es">PRE-COMPUTED SHA-256 (ES): <span class="hash-string">e9d84e185a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c</span></div>
+        <div class="hash-en">PRE-COMPUTED SHA-256 (EN): <span class="hash-string">c8b4d9a3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c2d7b4e185a6</span></div>
+        <div class="hash-es">PRE-COMPUTED SHA-256 (ES): <span class="hash-string">a6f20b9c3e174b5d8f9a2c4e6d7b8a1f3c5e9d2b4a6f8c0e1a3f9c2d7b4e185f</span></div>
     </div>
 </div>
 </body>
