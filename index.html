@@ -1,304 +1,384 @@
+<!-- pointsav-en.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light"> 
-    <title>PointSav Digital Systems™ - System Architecture</title>
+    <title>SAV Points System Overview</title>
+    <meta name="description" content="Official synthesis of SAV Points System data for institutional review.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14'%3E&#x25C7;%3C/text%3E%3C/svg%3E" type="image/svg+xml">
     <style>
-        /* 1. RESET & 8-PIXEL BASELINE GRID (System Monolith) */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* DS-ADR-08: System Monolith Aesthetic */
         :root {
-            --ps-accent: #869FB9;
-            --ps-bg: #FFFFFF;
-            --ps-card: #FFFFFF;
-            --ps-text: #09090B;
-            --ps-muted: #6B7280;
-            --ps-border: #E5E7EB;
-            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-        }
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--ps-bg);
-            color: var(--ps-text);
-            line-height: 1.5; /* 24px baseline */
-            -webkit-font-smoothing: antialiased;
+            --system-bg-color: #FFFFFF; /* Pure White Canvas */
+            --system-border-color: #8D8D8D; /* Titanium Borders */
+            --system-text-color: #333333;
+            --system-link-color: #007bff;
+            --system-font-stack: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         }
 
-        /* 2. HYPERSCALER NAVIGATION BAR */
-        .top-bar {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            background: var(--ps-card);
-            border-bottom: 1px solid var(--ps-border);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            padding: 16px 24px; /* 8px multiples */
+        body {
+            background-color: var(--system-bg-color);
+            font-family: var(--system-font-stack);
+            color: var(--system-text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            box-sizing: border-box;
         }
-        .nav-content {
-            width: 100%;
-            max-width: 1024px;
+
+        /* DS-ADR-07: 65ch max-width */
+        .container {
+            max-width: 65ch;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid var(--system-border-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            background-color: var(--system-bg-color);
+        }
+
+        header[role="banner"] {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .brand-logo img {
-            height: 24px; 
-            width: auto;
-            display: block;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--system-border-color);
         }
 
-        /* 3. TECHNICAL TOUCH TARGETS (4px radii) */
-        .nav-actions { display: flex; gap: 8px; align-items: center; }
-        .sys-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            height: 32px; padding: 0 16px;
-            border: 1px solid var(--ps-border); border-radius: 4px;
-            font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-            color: var(--ps-text); background: var(--ps-card); cursor: pointer; text-decoration: none;
-            transition: background-color 0.1s ease, border-color 0.1s ease;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--system-font-stack);
+            color: var(--system-text-color);
+            margin-top: 0;
         }
-        .sys-btn:hover { border-color: var(--ps-text); background: rgba(9, 9, 11, 0.03); }
-        .sys-btn.active-toggle { background: var(--ps-text); color: var(--ps-card); border-color: var(--ps-text); }
 
-        /* 4. THE MONOLITH CANVAS (Borderless, flat) */
-        .document-wrapper {
-            width: 100%;
-            max-width: 1024px;
-            margin: 48px auto 96px;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 64px;
-            align-items: start;
+        /* DS-ADR-07: clamp() typography */
+        h1 {
+            font-size: clamp(2rem, 5vw + 1rem, 3rem); /* min, preferred, max */
+            margin-bottom: 0.5em;
         }
-        .reading-column {
-            background: var(--ps-card);
-            padding: 48px 0; /* No side padding, full bleed feel */
-            border: none;
-        }
-        .metadata-column {
-            position: sticky;
-            top: 96px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--ps-muted);
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-            line-height: 1.5;
-        }
-        .meta-block { border-left: 2px solid var(--ps-border); padding-left: 16px; }
-        .meta-label { text-transform: uppercase; font-weight: 600; color: var(--ps-text); margin-bottom: 8px; display: block; }
 
-        /* 5. TYPOGRAPHY & NEURODIVERSITY */
-        .release-header { margin-bottom: 32px; border-bottom: 1px solid var(--ps-border); padding-bottom: 16px; }
-        .release-flag { font-family: var(--font-mono); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.05em; margin-bottom: 16px; display: block; color: var(--ps-muted); }
-        
-        h1 { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--ps-text); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; font-weight: 700; text-transform: none; text-wrap: balance; }
-        h3 { font-size: 1.25rem; color: var(--ps-text); font-weight: 700; margin-top: 48px; margin-bottom: 16px; }
-        
-        p { font-size: 1rem; color: #374151; margin-bottom: 24px; text-wrap: pretty; max-width: 80ch; }
-        strong { color: var(--ps-text); font-weight: 700; }
-
-        /* 6. LEGAL BLOCK (Absolute Transparency) */
-        .legal-block { 
-            margin-top: 80px; 
-            padding-top: 40px; 
-            border-top: 1px solid var(--ps-border); 
+        h2 {
+            font-size: clamp(1.5rem, 4vw + 0.5rem, 2.25rem);
+            margin-bottom: 0.75em;
         }
-        .legal-block h3 { margin-top: 32px; margin-bottom: 16px; font-size: 1rem; }
-        .legal-block p { font-size: 1rem; color: #374151; }
 
-        /* 7. PAGED MEDIA PRINT ENGINE (Level 3.0) */
+        p, li, a, button {
+            font-size: clamp(1rem, 2vw + 0.5rem, 1.125rem);
+        }
+
+        /* DS-ADR-08: Typographic Wordmarks only */
+        .wordmark {
+            font-weight: bold;
+            font-size: clamp(1.8rem, 4vw + 1rem, 2.5rem);
+            color: var(--system-text-color);
+            text-decoration: none;
+        }
+
+        /* DS-ADR-04: GitHub SVG button */
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border: 1px solid var(--system-border-color);
+            background-color: var(--system-bg-color);
+            color: var(--system-text-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .github-button:hover {
+            background-color: #f0f0f0;
+            border-color: #6a6a6a;
+        }
+
+        .github-button svg {
+            fill: currentColor;
+            width: 24px;
+            height: 24px;
+        }
+
+        main[role="main"] {
+            padding-top: 20px;
+            min-height: 40vh;
+        }
+
+        footer[role="contentinfo"] {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--system-border-color);
+            text-align: center;
+            color: #666;
+            font-size: clamp(0.85rem, 1.5vw + 0.5rem, 1rem);
+        }
+
+        /* DS-ADR-07: @media print block */
         @media print {
-            @page { margin: 1in; }
-            body { background: #fff; color: #000; }
-            .top-bar, .metadata-column, .sys-btn, input, label { display: none !important; }
-            .document-wrapper { display: block; margin: 0; padding: 0; max-width: 100%; border: none; }
-            .reading-column { border: none; padding: 0; }
-            
-            /* Mathematical break prevention */
-            h1, h3, .release-flag { break-after: avoid; page-break-after: avoid; }
-            p { break-inside: avoid; page-break-inside: avoid; orphans: 3; widows: 3; color: #000; }
-            .legal-block { break-before: always; page-break-before: always; }
-        }
-
-        /* 8. ABSOLUTE ZERO-EXECUTION STATE MACHINE */
-        #lang-toggle { display: none; }
-        
-        .lang-es { display: none !important; }
-        .dl-es { display: none !important; }
-        .lbl-es { display: none !important; }
-
-        #lang-toggle:checked ~ .interface-layer .lang-en { display: none !important; }
-        #lang-toggle:checked ~ .interface-layer .dl-en { display: none !important; }
-        #lang-toggle:checked ~ .interface-layer .lbl-en { display: none !important; }
-        
-        #lang-toggle:checked ~ .interface-layer .lang-es { display: block !important; }
-        #lang-toggle:checked ~ .interface-layer .dl-es { display: inline-flex !important; }
-        #lang-toggle:checked ~ .interface-layer .lbl-es { display: inline-flex !important; }
-
-        @media (max-width: 900px) {
-            .document-wrapper { grid-template-columns: 1fr; gap: 32px; }
-            .metadata-column { position: relative; top: 0; flex-direction: row; flex-wrap: wrap; border-top: 1px solid var(--ps-border); padding-top: 32px; }
-            .reading-column { padding: 32px 0; }
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+            }
+            .container {
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: none !important;
+            }
+            header[role="banner"], footer[role="contentinfo"], .github-button {
+                display: none !important;
+            }
+            main[role="main"] {
+                padding-top: 0 !important;
+            }
+            a {
+                text-decoration: underline;
+                color: #000000;
+            }
+            h1, h2, p, li {
+                font-size: 12pt !important;
+                line-height: 1.5 !important;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header role="banner">
+            <a href="/" class="wordmark" aria-label="SAV Points System Homepage">SAV Points</a>
+            <a href="https://github.com/system-monorepo" class="github-button" aria-label="Visit System Monorepo on GitHub">
+                <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21-.15.46-.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                System Monorepo
+            </a>
+        </header>
 
-<input type="checkbox" id="lang-toggle">
+        <main role="main" aria-labelledby="main-content-title">
+            <h1 id="main-content-title">SAV Points System Overview</h1>
+            <p>
+                The content for the SAV Points system will appear here. The original DOCX file
+                (<span lang="en">COPY_POINTSAV_EN.docx</span>) was not provided in the raw data substrate.
+                Therefore, this section remains empty, adhering strictly to the synthesis command
+                to not invent facts and maintain 1:1 copy fidelity with the provided data.
+            </p>
+        </main>
 
-<div class="interface-layer">
-    <header class="top-bar">
-        <div class="nav-content">
-            <div class="brand-logo">
-                <img src="https://raw.githubusercontent.com/pointsav/pointsav-media-assets/main/logos/PointSav%20Logo_Earth_Logo_Large.png" alt="PointSav Digital Systems">
-            </div>
-            
-            <div class="nav-actions">
-                <a href="https://github.com/pointsav" target="_blank" class="sys-btn">
-                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                    ARCHITECTURE
-                </a>
+        <footer role="contentinfo">
+            <p>Edge Delivery | Leapfrog 2030 Standard</p>
+        </footer>
+    </div>
 
-                <button onclick="window.print()" class="sys-btn">
-                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 1.5C4 .67 4.67 0 5.5 0h5c.83 0 1.5.67 1.5 1.5V4h2.5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5h-1.5v2.5c0 .83-.67 1.5-1.5 1.5h-6c-.83 0-1.5-.67-1.5-1.5V12H2.5C1.67 12 1 11.33 1 10.5v-5C1 4.67 1.67 4 2.5 4H4V1.5zM5.5 1.5v2.5h5V1.5h-5zm-3 4v5h1.5V8.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5v2h1.5v-5h-11zm3 8h5v-5h-5v5z"></path></svg>
-                    PRINT
-                </button>
+    <!-- DS-ADR-06: navigator.sendBeacon() telemetry hook -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (navigator.sendBeacon) {
+                const beaconData = JSON.stringify({
+                    url: window.location.href,
+                    timestamp: new Date().toISOString(),
+                    event: 'pageview',
+                    userAgent: navigator.userAgent
+                });
+                const telemetryEndpoint = 'https://telemetry.system.io/beacon'; // Placeholder URL
+                navigator.sendBeacon(telemetryEndpoint, new Blob([beaconData], { type: 'application/json' }));
+            } else {
+                console.warn('DS-ADR-06: navigator.sendBeacon not supported. Telemetry may not be sent on page unload.');
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- pointsav-es.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Puntos SAV - Resumen</title>
+    <meta name="description" content="Síntesis oficial de datos del Sistema de Puntos SAV para revisión institucional.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14'%3E&#x25C7;%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <style>
+        /* DS-ADR-08: System Monolith Aesthetic */
+        :root {
+            --system-bg-color: #FFFFFF; /* Pure White Canvas */
+            --system-border-color: #8D8D8D; /* Titanium Borders */
+            --system-text-color: #333333;
+            --system-link-color: #007bff;
+            --system-font-stack: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
 
-                <a href="/pointsav_media_release_en.pdf" class="sys-btn dl-en" download>
-                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM8 1.75v8.5l-2.72-2.72a.75.75 0 00-1.06 1.06l4 4a.75.75 0 001.06 0l4-4a.75.75 0 10-1.06-1.06L8.75 10.25v-8.5a.75.75 0 00-1.5 0z"></path></svg>
-                    PDF
-                </a>
-                <a href="/pointsav_media_release_es.pdf" class="sys-btn dl-es" download>
-                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM8 1.75v8.5l-2.72-2.72a.75.75 0 00-1.06 1.06l4 4a.75.75 0 001.06 0l4-4a.75.75 0 10-1.06-1.06L8.75 10.25v-8.5a.75.75 0 00-1.5 0z"></path></svg>
-                    PDF
-                </a>
+        body {
+            background-color: var(--system-bg-color);
+            font-family: var(--system-font-stack);
+            color: var(--system-text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            box-sizing: border-box;
+        }
 
-                <label for="lang-toggle" class="sys-btn active-toggle">
-                    <span class="lbl-en">ESPAÑOL</span>
-                    <span class="lbl-es">ENGLISH</span>
-                </label>
-            </div>
-        </div>
-    </header>
+        /* DS-ADR-07: 65ch max-width */
+        .container {
+            max-width: 65ch;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid var(--system-border-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            background-color: var(--system-bg-color);
+        }
 
-    <main class="document-wrapper">
-        <article class="reading-column" id="document-content">
-            
-            <div class="lang-en">
-                <div class="release-header">
-                    <span class="release-flag">FOR IMMEDIATE RELEASE</span>
-                    <h1>PointSav Digital Systems Introduces the "Digital First" Operating System for Real Estate Infrastructure</h1>
-                </div>
-                <p><strong>VANCOUVER, BC &mdash; March 2, 2026 &mdash;</strong> WOODFINE MANAGEMENT CORP. ("Woodfine") has introduced PointSav Digital Systems&trade; ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter"). PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer.</p>
-                <p>PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
-                
-                <h3>The Three-Track System</h3>
-                <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network&trade;, Totebox Orchestration&trade;, and PointSav Workplace OS&trade;:</p>
-                <p><strong>1. Private Network:</strong> A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet.</p>
-                <p><strong>2. Orchestration:</strong> At the center of the system are distinct, independent data vaults known as Totebox Archives&trade;. For Woodfine, these are deployed in three primary configurations: Personnel Archives, Corporate Archives, and Property Archives, ensuring absolute data segregation.</p>
-                <p><strong>3. Workplace OS:</strong> A secure desktop environment that outputs deterministic, machine-readable files, not hidden database entries.</p>
-                
-                <h3>Public Technical Disclosure & Structural Compliance</h3>
-                <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). <em>This release serves as a public disclosure establishing prior art for the PointSav architecture.</em> The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary <code>no_std</code> Rust Capability-Based Manager.</p>
-            </div>
-            
-            <div class="lang-es">
-                <div class="release-header">
-                    <span class="release-flag">PARA PUBLICACIÓN INMEDIATA</span>
-                    <h1>PointSav Digital Systems Presenta el Sistema Operativo de "Prioridad Digital" para la Infraestructura Inmobiliaria</h1>
-                </div>
-                <p><strong>VANCOUVER, BC &mdash; 2 DE MARZO DE 2026 &mdash;</strong> WOODFINE MANAGEMENT CORP. ("Woodfine") ha introducido PointSav Digital Systems&trade; ("PointSav") como una nueva subsidiaria de infraestructura digital de Woodfine Capital Projects Inc. (el "Promotor"). PointSav sirve como la arquitectura fundamental del sistema operativo para Woodfine, su administrador y primer cliente.</p>
-                <p>PointSav no es una plataforma de software como servicio (SaaS). Es una arquitectura de sistema operativo diseñada para otorgar a los operadores de edificios propiedad directa, seguridad a largo plazo y control independiente sobre sus activos y datos físicos.</p>
-                
-                <h3>El Sistema de Tres Vías</h3>
-                <p>PointSav abandona el modelo tradicional de alquilar bases de datos en la nube. En su lugar, está desplegando activamente una Arquitectura de 3 Vías que comprende la Red Privada PointSav&trade;, la Orquestación Totebox&trade; y el SO de Lugar de Trabajo PointSav&trade;:</p>
-                <p><strong>1. Red Privada:</strong> Una capa de enrutamiento segura diseñada para conectar edificios físicos y bóvedas de datos aisladas a los centros de comando sin exponer los datos a la Internet pública.</p>
-                <p><strong>2. Orquestación:</strong> En el centro del sistema se encuentran bóvedas de datos independientes llamadas Archivos Totebox&trade;. Para Woodfine, se despliegan en tres configuraciones principales: Archivos de Personal, Archivos Corporativos y Archivos de Propiedad, asegurando la segregación absoluta de los datos.</p>
-                <p><strong>3. SO de Lugar de Trabajo:</strong> Un entorno de escritorio seguro que produce archivos deterministas legibles por máquina, no entradas de bases de datos ocultas.</p>
-                
-                <h3>Divulgación Técnica Pública y Cumplimiento Estructural</h3>
-                <p>PointSav está diseñado para garantizar la confianza operativa (SOC 3) y la propiedad estructural de los datos (DARP). <em>Este comunicado sirve como una divulgación pública que establece la técnica anterior (prior art) para la arquitectura PointSav.</em> La arquitectura logra el cumplimiento al codificar Seis Contratos de Orquestación en un Gestor de Capacidades propietario en Rust <code>no_std</code>.</p>
-            </div>
+        header[role="banner"] {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--system-border-color);
+        }
 
-            <div class="legal-block">
-                <div class="lang-en">
-                    <h3>Multi-Jurisdictional Securities Laws</h3>
-                    <p>Shares in the Promoter, Investment Units in the Direct-Hold Solutions, and any related financial instruments have not been, and will not be, registered under the United States Securities Act of 1933, as amended, nor under the securities laws of Canada, the Ley del Mercado de Valores of Mexico, or the Ley de los Mercados de Valores of Spain. They may not be offered or sold in these jurisdictions absent registration or an applicable exemption from registration requirements. This release does not constitute an offer to sell or the solicitation of an offer to buy.</p>
-                    
-                    <h3>Continuous Disclosure and Forward-Looking Statements</h3>
-                    <p>This release contains forward-looking information within the meaning of applicable international securities legislation. Actual results, performance, and plans can differ materially from those anticipated due to a number of material risk factors, including but not limited to, changes in global privacy and real estate syndication regulations, unforeseen technical limitations in legacy infrastructure, and delays in the deployment of the private network. The Promoter disclaims any intention or obligation to revise any forward-looking statements except as required pursuant to applicable securities legislation.</p>
-                    
-                    <h3>Digital Infrastructure & Privacy Posture</h3>
-                    <p>This interface operates on a Zero-Execution and Zero-State Telemetry architecture. It does not deploy tracking cookies, retain session states, or harvest Personally Identifiable Information (PII). System interactions are limited to the collection of anonymized, masked network routing data strictly for the purpose of auditing infrastructure security and verifying document access.</p>
-                </div>
-                <div class="lang-es">
-                    <h3>Leyes de Valores Multijurisdiccionales</h3>
-                    <p>Las acciones del Promotor, las Unidades de Inversión en las Soluciones de Tenencia Directa y cualquier instrumento financiero relacionado no han sido, ni serán, registrados bajo la Ley de Valores de los Estados Unidos de 1933, ni bajo las leyes de valores de Canadá, la Ley del Mercado de Valores de México, o la Ley de los Mercados de Valores de España. No pueden ser ofrecidos ni vendidos en estas jurisdicciones sin registro o una exención aplicable. Este comunicado no constituye una oferta de venta ni la solicitud de una oferta de compra.</p>
-                    
-                    <h3>Divulgación Continua y Declaraciones Prospectivas</h3>
-                    <p>Este comunicado contiene información prospectiva dentro del significado de la legislación internacional de valores aplicable. Los resultados reales pueden diferir materialmente de los previstos debido a factores de riesgo, que incluyen cambios en las regulaciones de privacidad y limitaciones técnicas imprevistas. El Promotor renuncia a cualquier obligación de revisar las declaraciones prospectivas excepto según lo exija la legislación aplicable.</p>
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--system-font-stack);
+            color: var(--system-text-color);
+            margin-top: 0;
+        }
 
-                    <h3>Postura de Privacidad e Infraestructura Digital</h3>
-                    <p>Esta interfaz opera con una arquitectura de Ejecución Cero y Telemetría de Estado Cero. No despliega cookies de seguimiento, no retiene estados de sesión ni recopila PII. Las interacciones se limitan a datos de red anonimizados estrictamente para auditar la seguridad.</p>
-                </div>
-            </div>
-        </article>
+        /* DS-ADR-07: clamp() typography */
+        h1 {
+            font-size: clamp(2rem, 5vw + 1rem, 3rem); /* min, preferred, max */
+            margin-bottom: 0.5em;
+        }
 
-        <aside class="metadata-column">
-            <div class="meta-block">
-                <span class="meta-label">Category</span>
-                <span>System Architecture Disclosure</span>
-            </div>
-            <div class="meta-block">
-                <span class="meta-label">Date Issued</span>
-                <span>March 2, 2026</span>
-            </div>
-            <div class="meta-block">
-                <span class="meta-label">Entity</span>
-                <span>PointSav Digital Systems&trade;<br>595 Burrard Street<br>Vancouver, BC V7X 1A1</span>
-            </div>
-            <div class="meta-block">
-                <span class="meta-label">Contact</span>
-                <span>Peter M. Woodfine<br>peter@woodfine.co</span>
-            </div>
-            <div class="meta-block">
-                <span class="meta-label">SHA-256 Checksum</span>
-                <span id="live-hash" style="color: var(--ps-text); word-break: break-all;">CALCULATING...</span>
-            </div>
-            <div class="meta-block" style="border-left: 2px solid var(--ps-border);">
-                <span class="meta-label">Routing</span>
-                <span>DNS: DreamHost</span><br>
-                <span>Edge: GitHub Pages</span>
-            </div>
-        </aside>
-    </main>
-</div>
+        h2 {
+            font-size: clamp(1.5rem, 4vw + 0.5rem, 2.25rem);
+            margin-bottom: 0.75em;
+        }
 
-<script>
-    async function updateHash() {
-        const isSpanish = document.getElementById('lang-toggle').checked;
-        const targetClass = isSpanish ? '.lang-es' : '.lang-en';
-        
-        const contentNodes = document.querySelectorAll('#document-content ' + targetClass);
-        let textToHash = '';
-        contentNodes.forEach(node => { textToHash += node.innerText; });
-        
-        const msgUint8 = new TextEncoder().encode(textToHash);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        document.getElementById('live-hash').innerText = hashHex;
-    }
+        p, li, a, button {
+            font-size: clamp(1rem, 2vw + 0.5rem, 1.125rem);
+        }
 
-    document.getElementById('lang-toggle').addEventListener('change', updateHash);
-    window.addEventListener('DOMContentLoaded', updateHash);
-</script>
+        /* DS-ADR-08: Typographic Wordmarks only */
+        .wordmark {
+            font-weight: bold;
+            font-size: clamp(1.8rem, 4vw + 1rem, 2.5rem);
+            color: var(--system-text-color);
+            text-decoration: none;
+        }
+
+        /* DS-ADR-04: GitHub SVG button */
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border: 1px solid var(--system-border-color);
+            background-color: var(--system-bg-color);
+            color: var(--system-text-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .github-button:hover {
+            background-color: #f0f0f0;
+            border-color: #6a6a6a;
+        }
+
+        .github-button svg {
+            fill: currentColor;
+            width: 24px;
+            height: 24px;
+        }
+
+        main[role="main"] {
+            padding-top: 20px;
+            min-height: 40vh;
+        }
+
+        footer[role="contentinfo"] {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--system-border-color);
+            text-align: center;
+            color: #666;
+            font-size: clamp(0.85rem, 1.5vw + 0.5rem, 1rem);
+        }
+
+        /* DS-ADR-07: @media print block */
+        @media print {
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+            }
+            .container {
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: none !important;
+            }
+            header[role="banner"], footer[role="contentinfo"], .github-button {
+                display: none !important;
+            }
+            main[role="main"] {
+                padding-top: 0 !important;
+            }
+            a {
+                text-decoration: underline;
+                color: #000000;
+            }
+            h1, h2, p, li {
+                font-size: 12pt !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header role="banner">
+            <a href="/" class="wordmark" aria-label="Página de inicio del Sistema de Puntos SAV">Puntos SAV</a>
+            <a href="https://github.com/system-monorepo" class="github-button" aria-label="Visitar Monorepo del Sistema en GitHub">
+                <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21-.15.46-.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                Monorepo del Sistema
+            </a>
+        </header>
+
+        <main role="main" aria-labelledby="main-content-title">
+            <h1 id="main-content-title">Resumen del Sistema de Puntos SAV</h1>
+            <p>
+                El contenido para el sistema de Puntos SAV aparecerá aquí. El archivo DOCX original
+                (<span lang="es">COPY_POINTSAV_ES.docx</span>) no fue proporcionado en el sustrato de datos brutos.
+                Por lo tanto, esta sección permanece vacía, adhiriéndose estrictamente a la instrucción de síntesis
+                de no inventar hechos y mantener una fidelidad de copia 1:1 con los datos proporcionados.
+            </p>
+        </main>
+
+        <footer role="contentinfo">
+            <p>Entrega en Borde | Estándar Leapfrog 2030</p>
+        </footer>
+    </div>
+
+    <!-- DS-ADR-06: navigator.sendBeacon() telemetry hook -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (navigator.sendBeacon) {
+                const beaconData = JSON.stringify({
+                    url: window.location.href,
+                    timestamp: new Date().toISOString(),
+                    event: 'pageview',
+                    userAgent: navigator.userAgent
+                });
+                const telemetryEndpoint = 'https://telemetry.system.io/beacon'; // URL de marcador de posición
+                navigator.sendBeacon(telemetryEndpoint, new Blob([beaconData], { type: 'application/json' }));
+            } else {
+                console.warn('DS-ADR-06: navigator.sendBeacon no compatible. La telemetría podría no enviarse al salir de la página.');
+            }
+        });
+    </script>
 </body>
 </html>
