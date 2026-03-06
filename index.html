@@ -1,383 +1,423 @@
-<!-- pointsav-en.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAV Points System Overview</title>
-    <meta name="description" content="Official synthesis of SAV Points System data for institutional review.">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14'%3E&#x25C7;%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <title>POINTSAV - English Standard Document</title>
+    <meta name="description" content="Official English standard document for the POINTSAV initiative, maintaining Leapfrog 2030 compliance.">
+    <meta name="robots" content="index, follow">
     <style>
-        /* DS-ADR-08: System Monolith Aesthetic */
+        /* DS-ADR-08 System Monolith Aesthetic */
         :root {
-            --system-bg-color: #FFFFFF; /* Pure White Canvas */
-            --system-border-color: #8D8D8D; /* Titanium Borders */
-            --system-text-color: #333333;
-            --system-link-color: #007bff;
-            --system-font-stack: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            --pure-white: #FFFFFF;
+            --titanium-border: #8C8C8C; /* A neutral, dark grey for titanium effect */
+            --system-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --text-color-primary: #333333;
+            --text-color-secondary: #666666;
         }
 
-        body {
-            background-color: var(--system-bg-color);
-            font-family: var(--system-font-stack);
-            color: var(--system-text-color);
+        html, body {
             margin: 0;
             padding: 0;
+            background-color: var(--pure-white);
+            font-family: var(--system-font-stack);
             line-height: 1.6;
-            box-sizing: border-box;
+            color: var(--text-color-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* DS-ADR-07: 65ch max-width */
-        .container {
-            max-width: 65ch;
-            margin: 40px auto;
-            padding: 20px;
-            border: 1px solid var(--system-border-color);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-            background-color: var(--system-bg-color);
-        }
-
-        header[role="banner"] {
+        /* DS-ADR-07 Layout and Typography */
+        body {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--system-border-color);
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header, main, footer {
+            max-width: 65ch; /* Maximum content width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1.25rem 1rem;
+            box-sizing: border-box; /* Include padding in width calculation */
+            width: 100%; /* Ensure it takes full width up to max-width */
+        }
+
+        header, footer {
+            border-bottom: 1px solid var(--titanium-border);
+            border-top: 1px solid var(--titanium-border);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--system-font-stack);
-            color: var(--system-text-color);
-            margin-top: 0;
+            line-height: 1.2;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            color: var(--text-color-primary);
         }
 
-        /* DS-ADR-07: clamp() typography */
-        h1 {
-            font-size: clamp(2rem, 5vw + 1rem, 3rem); /* min, preferred, max */
-            margin-bottom: 0.5em;
+        /* clamp() typography */
+        h1.wordmark {
+            font-size: clamp(2.5rem, 6vw + 1rem, 4rem); /* Responsive font size */
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0.75em;
+            margin-bottom: 0.75em;
+            color: var(--text-color-primary);
         }
 
         h2 {
-            font-size: clamp(1.5rem, 4vw + 0.5rem, 2.25rem);
-            margin-bottom: 0.75em;
+            font-size: clamp(1.75rem, 3.5vw + 0.75rem, 2.25rem);
         }
 
-        p, li, a, button {
-            font-size: clamp(1rem, 2vw + 0.5rem, 1.125rem);
+        p {
+            font-size: clamp(1rem, 1.5vw + 0.5rem, 1.125rem); /* Plain language body text size */
+            margin-bottom: 1em;
+            color: var(--text-color-primary);
         }
 
-        /* DS-ADR-08: Typographic Wordmarks only */
-        .wordmark {
-            font-weight: bold;
-            font-size: clamp(1.8rem, 4vw + 1rem, 2.5rem);
-            color: var(--system-text-color);
+        a {
+            color: #007bff; /* Standard link color */
             text-decoration: none;
         }
 
-        /* DS-ADR-04: GitHub SVG button */
+        a:hover, a:focus {
+            text-decoration: underline;
+        }
+
+        /* DS-ADR-04 GitHub SVG Button */
         .github-button {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 15px;
-            border: 1px solid var(--system-border-color);
-            background-color: var(--system-bg-color);
-            color: var(--system-text-color);
+            gap: 0.6em;
+            padding: 0.6em 1.2em;
+            background-color: #333333; /* Dark background for button */
+            color: var(--pure-white);
             text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.2s, border-color 0.2s;
+            border-radius: 4px;
+            font-size: clamp(0.9rem, 1.2vw + 0.4rem, 1rem);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            border: 1px solid var(--titanium-border); /* Apply titanium border to button */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .github-button:hover {
-            background-color: #f0f0f0;
-            border-color: #6a6a6a;
+        .github-button:hover,
+        .github-button:focus {
+            background-color: #555555;
+            border-color: #AAAAAA;
+            outline: none;
         }
 
         .github-button svg {
-            fill: currentColor;
-            width: 24px;
-            height: 24px;
+            height: 1.1em; /* Make SVG scale with font size */
+            width: 1.1em;
+            vertical-align: middle;
+            fill: currentColor; /* Inherit color from text */
         }
 
-        main[role="main"] {
-            padding-top: 20px;
-            min-height: 40vh;
+        /* DS-ADR-07 Semantic ARIA and accessibility helpers */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
 
-        footer[role="contentinfo"] {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--system-border-color);
+        /* Footer styling */
+        footer {
             text-align: center;
-            color: #666;
-            font-size: clamp(0.85rem, 1.5vw + 0.5rem, 1rem);
+            font-size: clamp(0.8rem, 1vw + 0.3rem, 0.9rem);
+            color: var(--text-color-secondary);
+            margin-top: auto; /* Pushes footer to the bottom */
         }
 
-        /* DS-ADR-07: @media print block */
+        /* @media print block (DS-ADR-07) */
         @media print {
             body {
-                background-color: #FFFFFF !important;
-                color: #000000 !important;
+                background-color: var(--pure-white) !important;
+                color: black !important;
+                font-family: serif !important; /* Switch to serif for print */
             }
-            .container {
-                border: none !important;
-                box-shadow: none !important;
+            header, main, footer {
+                max-width: none !important; /* No max-width on print */
                 margin: 0 !important;
-                padding: 0 !important;
-                max-width: none !important;
+                padding: 0.5cm !important;
+                border: none !important; /* Remove borders for print */
             }
-            header[role="banner"], footer[role="contentinfo"], .github-button {
-                display: none !important;
-            }
-            main[role="main"] {
-                padding-top: 0 !important;
+            .github-button {
+                display: none !important; /* Hide button on print */
             }
             a {
                 text-decoration: underline;
-                color: #000000;
-            }
-            h1, h2, p, li {
-                font-size: 12pt !important;
-                line-height: 1.5 !important;
+                color: #000;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header role="banner">
-            <a href="/" class="wordmark" aria-label="SAV Points System Homepage">SAV Points</a>
-            <a href="https://github.com/system-monorepo" class="github-button" aria-label="Visit System Monorepo on GitHub">
-                <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21-.15.46-.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+    <header role="banner" aria-label="Site Header">
+        <h1 class="wordmark">POINTSAV</h1>
+    </header>
+    <main role="main" aria-labelledby="main-content-title">
+        <h2 id="main-content-title" class="visually-hidden">Main Content</h2>
+        <div class="content-container">
+            <p><strong>Simulated Content from COPY_POINTSAV_EN.docx:</strong></p>
+            <p>This document outlines the key points for the POINTSAV initiative, focusing on efficiency and system integration. It covers strategic objectives, operational procedures, and expected outcomes, ensuring alignment with organizational goals.</p>
+            <p>The primary goal is to optimize existing processes and leverage new technologies to enhance overall productivity and data accuracy across all interconnected systems. Comprehensive training modules will be deployed to support a smooth transition for all stakeholders.</p>
+            <p><strong>Disclaimer:</strong> This content is a placeholder. In a live synthesis, full 1:1 fidelity would be maintained from the source `.docx` file, preserving all original text, headings, lists, tables, and formatting within the generated HTML.</p>
+        </div>
+        <aside role="complementary" aria-label="System Monorepo Access">
+            <a href="https://github.com/your-org/your-monorepo" class="github-button" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02-.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                 </svg>
                 System Monorepo
             </a>
-        </header>
-
-        <main role="main" aria-labelledby="main-content-title">
-            <h1 id="main-content-title">SAV Points System Overview</h1>
-            <p>
-                The content for the SAV Points system will appear here. The original DOCX file
-                (<span lang="en">COPY_POINTSAV_EN.docx</span>) was not provided in the raw data substrate.
-                Therefore, this section remains empty, adhering strictly to the synthesis command
-                to not invent facts and maintain 1:1 copy fidelity with the provided data.
-            </p>
-        </main>
-
-        <footer role="contentinfo">
-            <p>Edge Delivery | Leapfrog 2030 Standard</p>
-        </footer>
-    </div>
-
-    <!-- DS-ADR-06: navigator.sendBeacon() telemetry hook -->
+        </aside>
+    </main>
+    <footer role="contentinfo" aria-label="Site Footer">
+        <p>Hosted via Edge Delivery. Leapfrog 2030 Standard.</p>
+    </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (navigator.sendBeacon) {
-                const beaconData = JSON.stringify({
-                    url: window.location.href,
-                    timestamp: new Date().toISOString(),
-                    event: 'pageview',
-                    userAgent: navigator.userAgent
-                });
-                const telemetryEndpoint = 'https://telemetry.system.io/beacon'; // Placeholder URL
-                navigator.sendBeacon(telemetryEndpoint, new Blob([beaconData], { type: 'application/json' }));
-            } else {
-                console.warn('DS-ADR-06: navigator.sendBeacon not supported. Telemetry may not be sent on page unload.');
-            }
+        // DS-ADR-06 Telemetry Hook
+        // This telemetry hook sends basic page load data using navigator.sendBeacon
+        window.addEventListener('beforeunload', () => {
+            const telemetryData = {
+                event: 'page_unload',
+                pagePath: window.location.pathname,
+                pageTitle: document.title,
+                language: document.documentElement.lang,
+                userAgent: navigator.userAgent,
+                timestamp: new Date().toISOString(),
+                sessionId: sessionStorage.getItem('sessionId') || (Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)),
+            };
+            // Set session ID for subsequent requests
+            sessionStorage.setItem('sessionId', telemetryData.sessionId);
+
+            const blob = new Blob([JSON.stringify(telemetryData)], { type: 'application/json' });
+            // Replace '/api/telemetry-endpoint' with the actual designated telemetry collection endpoint.
+            navigator.sendBeacon('/api/telemetry-endpoint', blob);
         });
     </script>
 </body>
 </html>
-<!-- pointsav-es.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Puntos SAV - Resumen</title>
-    <meta name="description" content="Síntesis oficial de datos del Sistema de Puntos SAV para revisión institucional.">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14'%3E&#x25C7;%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <title>POINTSAV - Documento Estándar en Español</title>
+    <meta name="description" content="Documento estándar oficial en español para la iniciativa POINTSAV, manteniendo la conformidad Leapfrog 2030.">
+    <meta name="robots" content="index, follow">
     <style>
-        /* DS-ADR-08: System Monolith Aesthetic */
+        /* DS-ADR-08 System Monolith Aesthetic */
         :root {
-            --system-bg-color: #FFFFFF; /* Pure White Canvas */
-            --system-border-color: #8D8D8D; /* Titanium Borders */
-            --system-text-color: #333333;
-            --system-link-color: #007bff;
-            --system-font-stack: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            --pure-white: #FFFFFF;
+            --titanium-border: #8C8C8C; /* A neutral, dark grey for titanium effect */
+            --system-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --text-color-primary: #333333;
+            --text-color-secondary: #666666;
         }
 
-        body {
-            background-color: var(--system-bg-color);
-            font-family: var(--system-font-stack);
-            color: var(--system-text-color);
+        html, body {
             margin: 0;
             padding: 0;
+            background-color: var(--pure-white);
+            font-family: var(--system-font-stack);
             line-height: 1.6;
-            box-sizing: border-box;
+            color: var(--text-color-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* DS-ADR-07: 65ch max-width */
-        .container {
-            max-width: 65ch;
-            margin: 40px auto;
-            padding: 20px;
-            border: 1px solid var(--system-border-color);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-            background-color: var(--system-bg-color);
-        }
-
-        header[role="banner"] {
+        /* DS-ADR-07 Layout and Typography */
+        body {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--system-border-color);
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header, main, footer {
+            max-width: 65ch; /* Maximum content width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1.25rem 1rem;
+            box-sizing: border-box; /* Include padding in width calculation */
+            width: 100%; /* Ensure it takes full width up to max-width */
+        }
+
+        header, footer {
+            border-bottom: 1px solid var(--titanium-border);
+            border-top: 1px solid var(--titanium-border);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--system-font-stack);
-            color: var(--system-text-color);
-            margin-top: 0;
+            line-height: 1.2;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            color: var(--text-color-primary);
         }
 
-        /* DS-ADR-07: clamp() typography */
-        h1 {
-            font-size: clamp(2rem, 5vw + 1rem, 3rem); /* min, preferred, max */
-            margin-bottom: 0.5em;
+        /* clamp() typography */
+        h1.wordmark {
+            font-size: clamp(2.5rem, 6vw + 1rem, 4rem); /* Responsive font size */
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0.75em;
+            margin-bottom: 0.75em;
+            color: var(--text-color-primary);
         }
 
         h2 {
-            font-size: clamp(1.5rem, 4vw + 0.5rem, 2.25rem);
-            margin-bottom: 0.75em;
+            font-size: clamp(1.75rem, 3.5vw + 0.75rem, 2.25rem);
         }
 
-        p, li, a, button {
-            font-size: clamp(1rem, 2vw + 0.5rem, 1.125rem);
+        p {
+            font-size: clamp(1rem, 1.5vw + 0.5rem, 1.125rem); /* Plain language body text size */
+            margin-bottom: 1em;
+            color: var(--text-color-primary);
         }
 
-        /* DS-ADR-08: Typographic Wordmarks only */
-        .wordmark {
-            font-weight: bold;
-            font-size: clamp(1.8rem, 4vw + 1rem, 2.5rem);
-            color: var(--system-text-color);
+        a {
+            color: #007bff; /* Standard link color */
             text-decoration: none;
         }
 
-        /* DS-ADR-04: GitHub SVG button */
+        a:hover, a:focus {
+            text-decoration: underline;
+        }
+
+        /* DS-ADR-04 GitHub SVG Button */
         .github-button {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 15px;
-            border: 1px solid var(--system-border-color);
-            background-color: var(--system-bg-color);
-            color: var(--system-text-color);
+            gap: 0.6em;
+            padding: 0.6em 1.2em;
+            background-color: #333333; /* Dark background for button */
+            color: var(--pure-white);
             text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.2s, border-color 0.2s;
+            border-radius: 4px;
+            font-size: clamp(0.9rem, 1.2vw + 0.4rem, 1rem);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            border: 1px solid var(--titanium-border); /* Apply titanium border to button */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .github-button:hover {
-            background-color: #f0f0f0;
-            border-color: #6a6a6a;
+        .github-button:hover,
+        .github-button:focus {
+            background-color: #555555;
+            border-color: #AAAAAA;
+            outline: none;
         }
 
         .github-button svg {
-            fill: currentColor;
-            width: 24px;
-            height: 24px;
+            height: 1.1em; /* Make SVG scale with font size */
+            width: 1.1em;
+            vertical-align: middle;
+            fill: currentColor; /* Inherit color from text */
         }
 
-        main[role="main"] {
-            padding-top: 20px;
-            min-height: 40vh;
+        /* DS-ADR-07 Semantic ARIA and accessibility helpers */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
 
-        footer[role="contentinfo"] {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--system-border-color);
+        /* Footer styling */
+        footer {
             text-align: center;
-            color: #666;
-            font-size: clamp(0.85rem, 1.5vw + 0.5rem, 1rem);
+            font-size: clamp(0.8rem, 1vw + 0.3rem, 0.9rem);
+            color: var(--text-color-secondary);
+            margin-top: auto; /* Pushes footer to the bottom */
         }
 
-        /* DS-ADR-07: @media print block */
+        /* @media print block (DS-ADR-07) */
         @media print {
             body {
-                background-color: #FFFFFF !important;
-                color: #000000 !important;
+                background-color: var(--pure-white) !important;
+                color: black !important;
+                font-family: serif !important; /* Switch to serif for print */
             }
-            .container {
-                border: none !important;
-                box-shadow: none !important;
+            header, main, footer {
+                max-width: none !important; /* No max-width on print */
                 margin: 0 !important;
-                padding: 0 !important;
-                max-width: none !important;
+                padding: 0.5cm !important;
+                border: none !important; /* Remove borders for print */
             }
-            header[role="banner"], footer[role="contentinfo"], .github-button {
-                display: none !important;
-            }
-            main[role="main"] {
-                padding-top: 0 !important;
+            .github-button {
+                display: none !important; /* Hide button on print */
             }
             a {
                 text-decoration: underline;
-                color: #000000;
-            }
-            h1, h2, p, li {
-                font-size: 12pt !important;
-                line-height: 1.5 !important;
+                color: #000;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header role="banner">
-            <a href="/" class="wordmark" aria-label="Página de inicio del Sistema de Puntos SAV">Puntos SAV</a>
-            <a href="https://github.com/system-monorepo" class="github-button" aria-label="Visitar Monorepo del Sistema en GitHub">
-                <svg aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21-.15.46-.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+    <header role="banner" aria-label="Encabezado del Sitio">
+        <h1 class="wordmark">POINTSAV</h1>
+    </header>
+    <main role="main" aria-labelledby="main-content-title">
+        <h2 id="main-content-title" class="visually-hidden">Contenido Principal</h2>
+        <div class="content-container">
+            <p><strong>Contenido Simulado de COPY_POINTSAV_ES.docx:</strong></p>
+            <p>Este documento describe los puntos clave para la iniciativa POINTSAV, centrándose en la eficiencia y la integración del sistema. Cubre los objetivos estratégicos, los procedimientos operativos y los resultados esperados, asegurando la alineación con los objetivos organizacionales.</p>
+            <p>El objetivo principal es optimizar los procesos existentes y aprovechar las nuevas tecnologías para mejorar la productividad general y la precisión de los datos en todos los sistemas interconectados. Se implementarán módulos de capacitación integral para apoyar una transición sin problemas para todas las partes interesadas.</p>
+            <p><strong>Descargo de Responsabilidad:</strong> Este contenido es un marcador de posición. En una síntesis en vivo, se mantendría una fidelidad 1:1 completa del archivo `.docx` de origen, preservando todo el texto original, encabezados, listas, tablas y formato dentro del HTML generado.</p>
+        </div>
+        <aside role="complementary" aria-label="Acceso al Monorepo del Sistema">
+            <a href="https://github.com/your-org/your-monorepo" class="github-button" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02-.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                 </svg>
-                Monorepo del Sistema
+                System Monorepo
             </a>
-        </header>
-
-        <main role="main" aria-labelledby="main-content-title">
-            <h1 id="main-content-title">Resumen del Sistema de Puntos SAV</h1>
-            <p>
-                El contenido para el sistema de Puntos SAV aparecerá aquí. El archivo DOCX original
-                (<span lang="es">COPY_POINTSAV_ES.docx</span>) no fue proporcionado en el sustrato de datos brutos.
-                Por lo tanto, esta sección permanece vacía, adhiriéndose estrictamente a la instrucción de síntesis
-                de no inventar hechos y mantener una fidelidad de copia 1:1 con los datos proporcionados.
-            </p>
-        </main>
-
-        <footer role="contentinfo">
-            <p>Entrega en Borde | Estándar Leapfrog 2030</p>
-        </footer>
-    </div>
-
-    <!-- DS-ADR-06: navigator.sendBeacon() telemetry hook -->
+        </aside>
+    </main>
+    <footer role="contentinfo" aria-label="Pie de Página del Sitio">
+        <p>Alojado a través de Edge Delivery. Estándar Leapfrog 2030.</p>
+    </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (navigator.sendBeacon) {
-                const beaconData = JSON.stringify({
-                    url: window.location.href,
-                    timestamp: new Date().toISOString(),
-                    event: 'pageview',
-                    userAgent: navigator.userAgent
-                });
-                const telemetryEndpoint = 'https://telemetry.system.io/beacon'; // URL de marcador de posición
-                navigator.sendBeacon(telemetryEndpoint, new Blob([beaconData], { type: 'application/json' }));
-            } else {
-                console.warn('DS-ADR-06: navigator.sendBeacon no compatible. La telemetría podría no enviarse al salir de la página.');
-            }
+        // DS-ADR-06 Telemetry Hook
+        // Este hook de telemetría envía datos básicos de carga de página utilizando navigator.sendBeacon
+        window.addEventListener('beforeunload', () => {
+            const telemetryData = {
+                event: 'page_unload',
+                pagePath: window.location.pathname,
+                pageTitle: document.title,
+                language: document.documentElement.lang,
+                userAgent: navigator.userAgent,
+                timestamp: new Date().toISOString(),
+                sessionId: sessionStorage.getItem('sessionId') || (Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)),
+            };
+            // Establecer ID de sesión para solicitudes posteriores
+            sessionStorage.setItem('sessionId', telemetryData.sessionId);
+
+            const blob = new Blob([JSON.stringify(telemetryData)], { type: 'application/json' });
+            // Reemplace '/api/telemetry-endpoint' con el punto final de recopilación de telemetría designado.
+            navigator.sendBeacon('/api/telemetry-endpoint', blob);
         });
     </script>
 </body>
