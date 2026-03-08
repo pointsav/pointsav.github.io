@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light"> 
+    <title>PointSav Digital Systems™ - System Architecture</title>
+    <style>
+        /* 1. RESET & 8-PIXEL BASELINE GRID (System Monolith - DS-ADR-08) */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --ps-bg: #FFFFFF;
+            --ps-card: #FFFFFF;
+            --ps-text: #09090B;
+            --ps-muted: #6B7280;
+            --ps-border: #E5E7EB;
+            --ps-accent: #869FB9;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--ps-bg);
+            color: var(--ps-text);
+            line-height: 1.5; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 2. HYPERSCALER NAVIGATION BAR */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: var(--ps-card);
+            border-bottom: 1px solid var(--ps-border);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            padding: 16px 24px;
+        }
+        .nav-content {
+            width: 100%;
+            max-width: 1024px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-logo {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--ps-text);
+        }
+
+        /* 3. TECHNICAL TOUCH TARGETS */
+        .nav-actions { display: flex; gap: 8px; align-items: center; }
+        .sys-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            height: 32px; padding: 0 16px;
+            border: 1px solid var(--ps-border); border-radius: 4px;
+            font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--ps-text); background: var(--ps-card); cursor: pointer; text-decoration: none;
+            transition: all 0.1s ease;
+        }
+        .sys-btn:hover { border-color: var(--ps-text); background: rgba(9, 9, 11, 0.03); }
+        .sys-btn.active-toggle { background: var(--ps-text); color: var(--ps-card); border-color: var(--ps-text); }
+
+        /* 4. THE MONOLITH CANVAS */
+        .document-wrapper {
+            width: 100%;
+            max-width: 1024px;
+            margin: 48px auto 96px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 64px;
+            align-items: start;
+        }
+        .reading-column { padding: 48px 0; border: none; }
+        .metadata-column {
+            position: sticky; top: 96px;
+            font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-muted);
+            display: flex; flex-direction: column; gap: 32px; line-height: 1.5;
+        }
+        .meta-block { border-left: 2px solid var(--ps-border); padding-left: 16px; }
+        .meta-label { text-transform: uppercase; font-weight: 600; color: var(--ps-text); margin-bottom: 8px; display: block; }
+
+        /* 5. TYPOGRAPHY & NEURODIVERSITY (DS-ADR-07) */
+        .release-header { margin-bottom: 32px; border-bottom: 1px solid var(--ps-border); padding-bottom: 16px; }
+        .release-flag { font-family: var(--font-mono); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.05em; margin-bottom: 16px; display: block; color: var(--ps-muted); }
+        h1 { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--ps-text); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; font-weight: 700; }
+        h3 { font-size: 1.25rem; color: var(--ps-text); font-weight: 700; margin-top: 48px; margin-bottom: 16px; }
+        p { font-size: 1rem; color: #374151; margin-bottom: 24px; max-width: 65ch; } /* 65ch enforced */
+        strong { color: var(--ps-text); font-weight: 700; }
+
+        /* 6. LEGAL BLOCK */
+        .legal-block { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--ps-border); }
+        .legal-block h3 { margin-top: 32px; margin-bottom: 16px; font-size: 1rem; }
+
+        /* 7. PRINT ENGINE */
+        @media print {
+            @page { margin: 1in; }
+            body { background: #fff; color: #000; }
+            .top-bar, .metadata-column, .sys-btn, input, label { display: none !important; }
+            .document-wrapper { display: block; margin: 0; padding: 0; max-width: 100%; }
+        }
+
+        /* 8. ZERO-EXECUTION STATE MACHINE */
+        #lang-toggle { display: none; }
+        .lang-es, .dl-es, .lbl-es { display: none !important; }
+        #lang-toggle:checked ~ .interface-layer .lang-en,
+        #lang-toggle:checked ~ .interface-layer .dl-en,
+        #lang-toggle:checked ~ .interface-layer .lbl-en { display: none !important; }
+        #lang-toggle:checked ~ .interface-layer .lang-es { display: block !important; }
+        #lang-toggle:checked ~ .interface-layer .dl-es,
+        #lang-toggle:checked ~ .interface-layer .lbl-es { display: inline-flex !important; }
+
+        @media (max-width: 900px) {
+            .document-wrapper { grid-template-columns: 1fr; gap: 32px; }
+            .metadata-column { position: relative; top: 0; flex-direction: row; flex-wrap: wrap; border-top: 1px solid var(--ps-border); padding-top: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<input type="checkbox" id="lang-toggle">
+
+<div class="interface-layer">
+    <header class="top-bar">
+        <div class="nav-content">
+            <div class="brand-logo">PointSav Digital Systems™</div>
+            <div class="nav-actions">
+                <a href="https://github.com/pointsav" target="_blank" class="sys-btn">
+                    <svg style="width:14px;height:14px" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                    MONOREPO
+                </a>
+                <button onclick="window.print()" class="sys-btn">PRINT</button>
+                <a href="/pointsav_media_release_en.pdf" class="sys-btn dl-en" download>PDF</a>
+                <a href="/pointsav_media_release_es.pdf" class="sys-btn dl-es" download>PDF</a>
+                <label for="lang-toggle" class="sys-btn active-toggle">
+                    <span class="lbl-en">ESPAÑOL</span>
+                    <span class="lbl-es">ENGLISH</span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="document-wrapper">
+        <article class="reading-column" id="document-content">
+            
+            <div class="lang-en">
+                <div class="release-header">
+                    <span class="release-flag">FOR IMMEDIATE RELEASE</span>
+                    <h1>PointSav Digital Systems™ Introduces the "Digital First" Operating System for Real Estate Infrastructure</h1>
+                </div>
+                <p><strong>Vancouver, British Columbia – March 2, 2026 –</strong> Woodfine Management Corp. ("Woodfine") has introduced PointSav Digital Systems™ ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter"). PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer.</p>
+                <p>PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
+                
+                <h3>The Three-Track System</h3>
+                <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network™, Totebox Orchestration™, and PointSav Workplace OS™:</p>
+                <p><strong>1. Private Network:</strong> A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet.</p>
+                <p><strong>2. Orchestration:</strong> At the center of the system are distinct, independent data vaults known as Totebox Archives™. For Woodfine, these are deployed in three primary configurations: Personnel Archives, Corporate Archives, and Property Archives, ensuring absolute data segregation.</p>
+                <p><strong>3. Workplace OS:</strong> A secure desktop environment that outputs deterministic, machine-readable files, not hidden database entries.</p>
+                
+                <h3>Public Technical Disclosure & Structural Compliance</h3>
+                <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). This release serves as a public disclosure establishing prior art for the PointSav architecture. The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary no_std Rust Capability-Based Manager.</p>
+            </div>
+            
+            <div class="lang-es">
+                <div class="release-header">
+                    <span class="release-flag">PARA PUBLICACIÓN INMEDIATA</span>
+                    <h1>PointSav Digital Systems™ Presenta el Sistema Operativo de "Prioridad Digital" para la Infraestructura Inmobiliaria</h1>
+                </div>
+                <p><strong>Vancouver, Columbia Británica – 2 de Marzo de 2026 –</strong> Woodfine Management Corp. ("Woodfine") ha introducido PointSav Digital Systems ("PointSav") como una nueva subsidiaria de infraestructura digital de Woodfine Capital Projects Inc. (el "Promotor"). PointSav sirve como la arquitectura fundamental del sistema operativo para Woodfine, su administrador y primer cliente.</p>
+                <p>PointSav no es una plataforma de software como servicio (SaaS). Es una arquitectura de sistema operativo diseñada para otorgar a los operadores de edificios propiedad directa, seguridad a largo plazo y control independiente sobre sus activos y datos físicos. En su núcleo, proporciona la base para la administración comercial, el mantenimiento de registros y la conectividad ciberfísica.</p>
+                
+                <h3>El Sistema de Tres Vías</h3>
+                <p>PointSav abandona el modelo tradicional de alquilar bases de datos en la nube. En su lugar, está desplegando activamente una Arquitectura de 3 Vías que comprende la PointSav Private Network™, Totebox Orchestration™, y PointSav Workplace OS™:</p>
+                <p><strong>1. Private Network:</strong> Una capa de enrutamiento segura diseñada para conectar edificios físicos y bóvedas de datos aisladas a los centros de comando sin exponer los datos a la Internet pública.</p>
+                <p><strong>2. Orchestration:</strong> En el centro del sistema se encuentran bóvedas de datos independientes llamadas Archivos Totebox™. Para Woodfine, se despliegan en tres configuraciones principales: Archivos de Personal, Archivos Corporativos y Archivos de Propiedad, asegurando la segregación absoluta de los datos.</p>
+                <p><strong>3. Workplace OS:</strong> Un entorno de escritorio seguro que produce archivos deterministas legibles por máquina, no entradas de bases de datos ocultas.</p>
+                
+                <h3>Divulgación Técnica Pública y Cumplimiento Estructural</h3>
+                <p>PointSav está diseñado para garantizar la confianza operativa (SOC 3) y la propiedad estructural de los datos (DARP). Este comunicado sirve como una divulgación pública que establece la técnica anterior (prior art) para la arquitectura PointSav. La arquitectura logra el cumplimiento al codificar Seis Contratos de Orquestación en un Gestor de Capacidades propietario en Rust no_std.</p>
+            </div>
+
+            <div class="legal-block">
+                <div class="lang-en">
+                    <h3>Multi-Jurisdictional Securities Laws</h3>
+                    <p>Shares in the Promoter, Investment Units in the Direct-Hold Solutions, and any related financial instruments have not been, and will not be, registered under the United States Securities Act of 1933, as amended, nor under the securities laws of Canada, the Ley del Mercado de Valores of Mexico, or the Ley de los Mercados de Valores of Spain, and they may not be offered or sold in these jurisdictions absent registration or an applicable exemption from registration requirements. This release does not constitute an offer to sell or the solicitation of an offer to buy. There will be no sale of shares or Investment Units in any province, state, or jurisdiction in which such offer, solicitation, or sale would be unlawful prior to registration or qualification under applicable securities laws and regulations.</p>
+                    
+                    <h3>Continuous Disclosure and Forward-Looking Statements</h3>
+                    <p>This release contains forward-looking information within the meaning of applicable international securities legislation, including National Instrument 51-102 Continuous Disclosure Obligations in Canada, and equivalent regulatory frameworks governing real estate investment vehicles and Direct-Hold Solutions globally. Actual results, performance, and plans can differ materially from those anticipated due to a number of material risk factors, including but not limited to, changes in global privacy and real estate syndication regulations, unforeseen technical limitations in legacy infrastructure, and delays in the deployment of the private network.</p>
+                </div>
+                <div class="lang-es">
+                    <h3>Leyes de Valores Multijurisdiccionales</h3>
+                    <p>Las acciones del Promotor, las Unidades de Inversión en las Soluciones de Tenencia Directa y cualquier instrumento financiero relacionado no han sido, ni serán, registrados bajo la Ley de Valores de los Estados Unidos de 1933, ni bajo las leyes de valores de Canadá, la Ley del Mercado de Valores de México, o la Ley de los Mercados de Valores de España y no pueden ser ofrecidos ni vendidos en estas jurisdicciones sin registro o una exención aplicable. Este comunicado no constituye una oferta de venta ni la solicitud de una oferta de compra.</p>
+                    
+                    <h3>Divulgación Continua y Declaraciones Prospectivas</h3>
+                    <p>Este comunicado contiene información prospectiva dentro del significado de la legislación internacional de valores aplicable. Los resultados, el rendimiento y los planes reales pueden diferir materialmente de los previstos debido a una serie de factores de riesgo materiales, que incluyen, entre otros, cambios en las regulaciones globales de privacidad y sindicación inmobiliaria, limitaciones técnicas imprevistas en la infraestructura heredada y retrasos en el despliegue de la red privada.</p>
+                </div>
+            </div>
+        </article>
+
+        <aside class="metadata-column">
+            <div class="meta-block">
+                <span class="meta-label">Category</span>
+                <span>System Architecture Disclosure</span>
+            </div>
+            <div class="meta-block">
+                <span class="meta-label">Date Issued</span>
+                <span>March 2, 2026</span>
+            </div>
+            <div class="meta-block">
+                <span class="meta-label">Entity</span>
+                <span>PointSav Digital Systems™<br>Vancouver, BC</span>
+            </div>
+            <div class="meta-block">
+                <span class="meta-label">SHA-256 Checksum</span>
+                <span id="live-hash" style="color: var(--ps-text); word-break: break-all;">CALCULATING...</span>
+            </div>
+            <div class="meta-block" style="border-left: 2px solid var(--ps-border);">
+                <span class="meta-label">Routing</span>
+                <span>DNS: DreamHost</span><br>
+                <span>Edge: GitHub Pages</span>
+            </div>
+        </aside>
+    </main>
+</div>
+
+<script>
+    // Live SHA-256 Hash Generation
+    async function updateHash() {
+        const isSpanish = document.getElementById('lang-toggle').checked;
+        const targetClass = isSpanish ? '.lang-es' : '.lang-en';
+        const contentNodes = document.querySelectorAll('#document-content ' + targetClass);
+        let textToHash = '';
+        contentNodes.forEach(node => { textToHash += node.innerText; });
+        
+        const msgUint8 = new TextEncoder().encode(textToHash);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        document.getElementById('live-hash').innerText = hashHex;
+    }
+
+    document.getElementById('lang-toggle').addEventListener('change', updateHash);
+    window.addEventListener('DOMContentLoaded', updateHash);
+
+    // DS-ADR-06 Telemetry Hook
+    if (navigator.sendBeacon) {
+        window.addEventListener("unload", function() {
+            navigator.sendBeacon("/telemetry-endpoint", JSON.stringify({
+                uri: window.location.pathname,
+                timestamp: Date.now()
+            }));
+        });
+    }
+</script>
+</body>
+</html>
