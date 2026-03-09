@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <title>PointSav</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect x=%220%22 y=%220%22 width=%22100%22 height=%22100%22 fill=%22%23869FB9%22/></svg>">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -27,7 +28,7 @@
         .meta-box { border-top: 1px solid var(--ps-border); padding-top: 16px; }
         .meta-label { color: var(--ps-muted); font-weight: 700; margin-bottom: 4px; display: block; }
         h1 { font-size: 2.5rem; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
-        h3 { margin-top: 32px; margin-bottom: 12px; font-size: 1.1rem; }
+        h3 { margin-top: 32px; margin-bottom: 12px; font-size: 1.1rem; border-bottom: 1px solid var(--ps-border); padding-bottom: 8px; }
         p { margin-bottom: 16px; max-width: 65ch; color: #18181b; }
         .lang-es, .btn-es { display: none !important; }
         #toggle:checked ~ .ui .lang-en, #toggle:checked ~ .ui .btn-en { display: none !important; }
@@ -39,6 +40,7 @@
             .main-grid { display: block; margin: 0; }
             .content { border: none; padding: 0; }
             p { margin-bottom: 8px; font-size: 11pt; }
+            h3 { margin-top: 16px; }
             @page { margin: 0.5in; }
         }
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } .sidebar { position: static; } }
@@ -69,20 +71,24 @@
                 <p style="color:var(--ps-accent); font-weight:700; font-family:var(--font-mono); font-size:0.75rem;">FOR IMMEDIATE RELEASE</p>
                 <h1>PointSav Digital Systems™ Introduces the "Digital First" Operating System for Real Estate Infrastructure</h1>
                 <p><strong>Vancouver, British Columbia - March 2, 2026 -</strong> Woodfine Management Corp. ("Woodfine") has introduced PointSav Digital Systems™ ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter").</p>
-                <p>PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer. PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data.</p>
+                <p>PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer. PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
                 <h3>The Three-Track System</h3>
-                <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture: PointSav Private Network™, Totebox Orchestration™, and PointSav Workplace OS™.</p>
+                <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network™, Totebox Orchestration™, and PointSav Workplace OS™:</p>
                 <p>1. Private Network: A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet.</p>
-                <p>2. Orchestration: At the center of the system are distinct, independent data vaults known as Totebox Archives™. For Woodfine, these are deployed in Personnel, Corporate, and Property configurations, ensuring absolute data segregation.</p>
+                <p>2. Orchestration: At the center of the system are distinct, independent data vaults known as Totebox Archives™. For Woodfine, these are deployed in three primary configurations: Personnel Archives, Corporate Archives, and Property Archives, ensuring absolute data segregation.</p>
                 <p>3. Workplace OS: A secure desktop environment that outputs deterministic, machine-readable files, not hidden database entries.</p>
                 <h3>Public Technical Disclosure & Structural Compliance</h3>
-                <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary no_std Rust Capability-Based Manager.</p>
+                <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). This release serves as a public disclosure establishing prior art for the PointSav architecture. The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary no_std Rust Capability-Based Manager.</p>
+                <div style="margin-top:64px; font-size:0.875rem; color:var(--ps-muted); border-top:1px solid var(--ps-border); padding-top:24px;">
+                    <h3 style="border:none; margin:0; font-size:1rem; color:var(--ps-text);">Digital Infrastructure & Privacy Posture</h3>
+                    <p style="font-size:0.875rem; color:var(--ps-muted);">This interface operates on a Zero-Execution and Zero-State Telemetry architecture. It does not deploy tracking cookies, retain session states, or harvest Personally Identifiable Information (PII). System interactions are limited to the collection of anonymized, masked network routing data strictly for the purpose of auditing infrastructure security and verifying document access.</p>
+                </div>
             </div>
             <div class="lang-es">
                 <p style="color:var(--ps-accent); font-weight:700; font-family:var(--font-mono); font-size:0.75rem;">PARA PUBLICACIÓN INMEDIATA</p>
                 <h1>PointSav Digital Systems™ Presenta el Sistema Operativo de "Prioridad Digital" para la Infraestructura Inmobiliaria</h1>
                 <p><strong>Vancouver, Columbia Británica - 2 de Marzo de 2026 -</strong> Woodfine Management Corp. ("Woodfine") ha introducido PointSav Digital Systems™ ("PointSav") como una nueva subsidiaria de infraestructura digital de Woodfine Capital Projects Inc. (el "Promotor").</p>
-                <p>PointSav sirve como la arquitectura fundamental del sistema operativo para Woodfine, su administrador y primer cliente. PointSav no es una plataforma de software como servicio (SaaS). Es una arquitectura diseñada para otorgar a los operadores de edificios propiedad directa, seguridad a largo plazo y control independiente sobre sus activos y datos físicos.</p>
+                <p>PointSav sirve como la arquitectura fundamental del sistema operativo para Woodfine. No es una plataforma SaaS. Es una arquitectura de sistema operativo diseñada para otorgar a los operadores de edificios propiedad directa, seguridad a largo plazo y control independiente sobre sus activos y datos físicos.</p>
                 <h3>El Sistema de Tres Vías</h3>
                 <p>1. Private Network: Una capa de enrutamiento segura diseñada para conectar edificios físicos y bóvedas de datos aisladas sin exponer los datos a la Internet pública.</p>
                 <p>2. Orchestration: En el centro del sistema se encuentran bóvedas independientes llamadas Archivos Totebox™. Se despliegan en configuraciones de Personal, Corporativo y Propiedad.</p>
@@ -95,7 +101,11 @@
             <div class="meta-box"><span class="meta-label">Date Issued</span><span>March 2, 2026</span></div>
             <div class="meta-box"><span class="meta-label">Contact</span><span>
                 Peter M. Woodfine<br>Executive Officer<br><br>
-                <a href="mailto:peter@pointsav.com" style="color:var(--ps-accent); text-decoration:none;">peter@pointsav.com</a><br>
+                Woodfine Management Corp.<br>
+                595 Burrard Street, Lower Concourse<br>
+                PO BOX 48295 Bentall<br>
+                Vancouver, BC V7X 1A1<br><br>
+                <a href="mailto:peter@woodfinegroup.com" style="color:var(--ps-accent); text-decoration:none;">peter@woodfinegroup.com</a><br>
                 <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
                     <span>+1 604-375-1196</span>
                     <a href="https://wa.me/16043751196" target="_blank" style="color:#25D366;">
