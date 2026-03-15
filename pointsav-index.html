@@ -44,15 +44,16 @@
             --ps-card: #FFFFFF; 
             --ps-text: #09090B; 
             --ps-muted: #6B7280; 
-            --ps-border: #E5E7EB; /* PointSav Surgical 1px Standard */
+            --ps-border: #E5E7EB; 
             --ps-accent: #869FB9; 
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
             --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; 
         }
 
-        /* RESET & PHYSICS (MAC TYPOGRAPHY LOCKDOWN) */
+        /* RESET & PHYSICS */
         * { box-sizing: border-box; margin: 0; padding: 0; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        body { font-family: var(--font-sans); background: var(--ps-canvas); color: var(--ps-text); line-height: 1.5; }
+        html { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+        body { font-family: var(--font-sans); background: var(--ps-canvas); color: var(--ps-text); line-height: 1.5; overflow-x: hidden; }
         
         /* LAYOUT ARCHITECTURE */
         .header-bar { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--ps-border); padding: max(16px, env(safe-area-inset-top)) 24px 16px 24px; z-index: 100; will-change: transform; transform: translateZ(0); }
@@ -62,7 +63,7 @@
         
         .main-grid { width: 100%; max-width: 1024px; margin: 48px auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 300px; gap: 64px; align-items: start; }
         
-        /* CONTENT STYLING (OPEN MANUSCRIPT) */
+        /* CONTENT STYLING */
         .document-canvas { background: transparent; padding: 0; border: none; }
         .release-flag { color: var(--ps-accent); font-weight: 700; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 16px; display: block; }
         h1 { font-size: clamp(2rem, 4vw, 2.5rem); line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em; font-weight: 800; }
@@ -70,8 +71,8 @@
         p { margin-bottom: 16px; max-width: 65ch; font-size: 1.0625rem; }
         strong { font-weight: 700; }
 
-        /* LEGAL LEDGER (DOCUMENT SPECIFIC) */
-        .quarantine-line { border: none; border-top: 1px solid var(--ps-border); margin: 64px 0 32px 0; }
+        /* LEGAL LEDGER */
+        .quarantine-line { border: none; border-top: 1px solid var(--ps-border); margin: 40px 0 24px 0; }
         .legal-ledger { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-muted); }
         .legal-ledger h4 { font-size: 0.875rem; color: var(--ps-text); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
         .legal-ledger p { font-size: 0.75rem; margin-bottom: 16px; max-width: 100%; }
@@ -79,20 +80,21 @@
         /* SIDEBAR LEDGER */
         .sidebar-ledger { position: sticky; top: max(100px, calc(env(safe-area-inset-top) + 80px)); display: flex; flex-direction: column; gap: 24px; font-family: var(--font-mono); font-size: 0.875rem; will-change: transform; transform: translateZ(0); }
         .trust-badge { background: var(--ps-text); color: var(--ps-card); padding: 12px; text-align: center; font-weight: 700; letter-spacing: 0.05em; border-radius: 2px; }
-        .meta-block { border-top: 1px solid var(--ps-border); padding-top: 16px; }
+        .meta-block { border-left: 1px solid var(--ps-border); padding-left: 16px; }
         .meta-label { display: block; color: var(--ps-muted); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px; }
+        #hash-display { font-variant-numeric: tabular-nums; }
         
-        /* GLOBAL FOOTER (DECOUPLED) */
-        .global-footer-wrapper { border-top: 1px solid var(--ps-border); background: var(--ps-canvas); margin-top: 64px; }
-        .global-footer { width: 100%; max-width: 1024px; margin: 0 auto; padding: 48px 24px max(48px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1fr; gap: 64px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-muted); }
+        /* GLOBAL FOOTER (Tighter Spacing) */
+        .global-footer-wrapper { border-top: 1px solid var(--ps-border); background: var(--ps-canvas); margin-top: 40px; }
+        .global-footer { width: 100%; max-width: 1024px; margin: 0 auto; padding: 32px 24px max(32px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-muted); }
         .global-footer h4 { font-size: 0.875rem; color: var(--ps-text); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
         .global-footer p { font-size: 0.75rem; margin-bottom: 16px; max-width: 100%; }
 
-        /* INTERACTIVE PRIMITIVES (MATHEMATICAL ALIGNMENT) */
-        .btn { height: 44px; padding: 0 20px; border: 1px solid var(--ps-border); background: var(--ps-card); color: var(--ps-text); font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 2px; transition: background 0.2s; }
+        /* INTERACTIVE PRIMITIVES (PointSav 1px Borders) */
+        .btn { height: 44px; padding: 0 20px; border: 1px solid var(--ps-border); background: var(--ps-card); color: var(--ps-text); font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 2px; transition: background 0.2s, border-color 0.2s; touch-action: manipulation; }
         .btn svg { display: block; flex-shrink: 0; width: 18px; height: 18px; }
         .btn span { display: block; line-height: 1; transform: translateY(1px); }
-        .btn:hover { background: #f9fafb; }
+        .btn:hover { background: #f9fafb; border-color: var(--ps-text); }
         .btn-primary { background: var(--ps-text); color: var(--ps-card); border-color: var(--ps-text); }
         .btn-primary:hover { background: #000; }
         
@@ -108,37 +110,41 @@
 
         /* RESPONSIVE DOMINANCE */
         @media (max-width: 900px) {
-            .nav-container { flex-direction: column; align-items: center; justify-content: center; }
-            .desktop-actions { justify-content: center; width: 100%; flex-wrap: wrap; }
+            /* Mobile Geometry applied here: The gap spaces the wordmark from the buttons, and flex: 1 1 0 forces buttons to fill screen width equally */
+            .nav-container { flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+            .desktop-actions { justify-content: center; width: 100%; gap: 8px; }
+            .desktop-actions .btn:not(.hide-on-mobile) { flex: 1 1 0; justify-content: center; padding: 0 8px; }
+            
             .hide-on-mobile { display: none !important; }
+            #lang-toggle:checked ~ .app-wrapper .hide-on-mobile { display: none !important; }
             
             .main-grid { grid-template-columns: 1fr; gap: 40px; margin: 32px auto; padding: 0 16px; }
             .sidebar-ledger { position: relative; top: 0; transform: none; }
-            .global-footer { grid-template-columns: 1fr; gap: 24px; padding-bottom: calc(100px + env(safe-area-inset-bottom)); } 
+            .global-footer { grid-template-columns: 1fr; gap: 24px; padding-bottom: calc(80px + env(safe-area-inset-bottom)); } 
             .desktop-whatsapp { display: none !important; } 
             
-            /* DOCK TO BOTTOM ON MOBILE (WHATSAPP ONLY) */
             .mobile-dock { display: flex; position: fixed; bottom: 0; left: 0; right: 0; background: var(--ps-card); border-top: 1px solid var(--ps-border); padding: 12px 16px max(12px, env(safe-area-inset-bottom)) 16px; z-index: 999; box-shadow: 0 -4px 12px rgba(0,0,0,0.05); will-change: transform; transform: translateZ(0); }
-            .mobile-dock .btn { flex: 1; height: 48px; }
+            .mobile-dock .btn { flex: 1; height: 48px; border-right: 1px solid var(--ps-border); }
+            .mobile-dock .btn:last-child { border-right: none; }
         }
 
-        /* REGULATORY PRINT EGRESS (PHYSICAL EXTRACT) */
+        /* REGULATORY PRINT EGRESS (SERIF PROSPECTUS) */
         .print-only { display: none; }
         @media print {
             body { color: #000000 !important; background: #FFFFFF !important; }
-            .header-bar, .sidebar-ledger, .mobile-dock, .desktop-actions, .desktop-whatsapp { display: none !important; }
+            .header-bar, .sidebar-ledger, .mobile-dock, .desktop-actions, .desktop-whatsapp, .global-footer-wrapper { display: none !important; }
             .main-grid { display: block; margin: 0; padding: 0; }
             .document-canvas { padding: 0; background: transparent; }
-            .global-footer-wrapper { border-top: 1px solid #000; padding-top: 12px; margin-top: 24px; display: block; page-break-inside: avoid; background: transparent; }
-            .global-footer { padding: 0; display: block; }
             
-            p { font-size: 10pt; line-height: 1.3; orphans: 4; widows: 4; page-break-inside: avoid; }
-            h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid; color: #000 !important; }
-            h1 { font-size: 18pt; margin-bottom: 16px; }
+            p, .legal-ledger { font-family: "Georgia", "Times New Roman", serif !important; font-size: 10pt; line-height: 1.35; orphans: 4; widows: 4; page-break-inside: avoid; }
+            h1, h2, h3, h4 { font-family: "Georgia", "Times New Roman", serif !important; page-break-after: avoid; break-after: avoid; color: #000 !important; }
+            
+            /* Prevent Title Overflow */
+            h1 { font-size: 18pt; margin-bottom: 16px; max-width: 100%; overflow-wrap: break-word; }
             h3 { font-size: 12pt; margin-top: 16px; }
             
             .document-canvas a::after { content: " (" attr(href) ")"; font-size: 0.85em; text-decoration: underline; color: #333; }
-            .print-only { display: block; margin-top: 24px; page-break-inside: avoid; font-size: 10pt; }
+            .print-only { display: block; margin-top: 24px; page-break-inside: avoid; font-size: 10pt; font-family: "Georgia", "Times New Roman", serif !important; }
             .legal-ledger { page-break-inside: avoid; }
             @page { margin: 0.75in 0.5in; }
         }
@@ -239,6 +245,7 @@
 </script>
 
 <script>
+/* SCRIPT UPDATE: Purged hide-on-mobile from the Monorepo Link so it renders on small viewports */
 document.getElementById('token-wordmark').innerHTML = `PointSav Digital Systems`;
 
 document.getElementById('token-desktop-nav').innerHTML = `
@@ -265,7 +272,7 @@ document.getElementById('token-mobile-dock').innerHTML = `
 document.getElementById('token-sidebar').innerHTML = `
     <div class="trust-badge">[ ∅ ZERO COOKIES ]</div>
     
-    <div class="meta-block" style="border-top: 1px solid var(--ps-border);">
+    <div class="meta-block">
         <span class="meta-label">Issued</span>
         <time datetime="2026-03-02">March 2, 2026</time>
     </div>
@@ -317,7 +324,7 @@ document.getElementById('token-body-es').innerHTML = `
     
     <h3>El Sistema de Tres Vías</h3>
     <p>PointSav abandona el modelo tradicional de alquilar bases de datos en la nube. En su lugar, está desplegando activamente una Arquitectura de 3 Vías que comprende la PointSav Private Network, Totebox Orchestration, y PointSav Workplace OS:</p>
-    <p><strong>1. Private Network:</strong> Una capa de enrutamiento segura diseñada para conectar edificios físicos y bóvedas de datos aisladas a los centros de comando sin exponer los datos a la Internet pública.</p>
+    <p><strong>1. Red Privada:</strong> Una capa de enrutamiento segura diseñada para conectar edificios físicos y bóvedas de datos aisladas a los centros de comando sin exponer los datos a la Internet pública.</p>
     <p><strong>2. Orchestration:</strong> En el centro del sistema se encuentran bóvedas de datos independientes llamadas Archivos Totebox. Para Woodfine, se despliegan en tres configuraciones principales: Archivos de Personal, Archivos Corporativos y Archivos de Propiedad, asegurando la segregación absoluta de los datos.</p>
     <p><strong>3. Workplace OS:</strong> Un entorno de escritorio seguro que produce archivos deterministas legibles por máquina, no entradas de bases de datos ocultas.</p>
     
@@ -341,15 +348,15 @@ document.getElementById('token-document-disclaimers').innerHTML = `
     <p>This release contains forward-looking information within the meaning of applicable international securities legislation. Forward-looking information in this release includes, but is not limited to, statements regarding the integration timeline, cost structures, operational capabilities of the PointSav architecture, and the anticipated compliance benefits (SOC 3 and DARP). These statements are based on expectations and assumptions made by management, specifically the assumption that deployment to hardware endpoints will proceed without supply chain disruptions. Actual results, performance, and plans can differ materially from those anticipated.</p>
 `;
 
-// SITE-WIDE GLOBAL FOOTER
+// SITE-WIDE GLOBAL FOOTER (HIDDEN ON PRINT)
 document.getElementById('token-global-footer').innerHTML = `
+    <div class="copyright-disclaimer">
+        <h4>Trademarks & Copyright</h4>
+        <p>PointSav Digital Systems, Woodfine Capital Projects, and Woodfine Management Corp. are trademarks of Woodfine Capital Projects Inc. Copyright 2011&ndash;${new Date().getFullYear()} Woodfine Management Corp. All rights reserved.</p>
+    </div>
     <div class="digital-disclaimer">
         <h4>Digital Infrastructure & Privacy Posture</h4>
         <p>This interface operates on a Zero-Cookie and Zero-State Telemetry architecture. It does not deploy tracking cookies, retain session states, or harvest Personally Identifiable Information (PII). System interactions are limited to the collection of anonymized network routing and viewport data strictly for the purpose of auditing infrastructure performance.</p>
-    </div>
-    <div class="copyright-disclaimer">
-        <h4>Trademarks & Copyright</h4>
-        <p>PointSav Digital Systems, Woodfine Capital Projects, and Woodfine Management Corp. are trademarks of Woodfine Capital Projects Inc. Copyright 2011&ndash;<span id="current-year"></span> Woodfine Management Corp. All rights reserved.</p>
     </div>
 `;
 </script>
