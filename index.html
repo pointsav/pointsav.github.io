@@ -31,9 +31,9 @@
     {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "PointSav Digital Systems Introduces the Digital First Operating System",
-      "datePublished": "2026-03-02T08:00:00Z",
-      "author": [{ "@type": "Organization", "name": "Woodfine Management Corp." }]
+      "headline": "The Shift Toward Digital Sovereignty In Physical Assets",
+      "datePublished": "2026-03-20T08:00:00Z",
+      "author": [{ "@type": "Organization", "name": "PointSav Digital Systems" }]
     }]
     </script>
 
@@ -61,15 +61,38 @@
         .wordmark { font-weight: 800; font-size: 1.125rem; letter-spacing: -0.03em; text-transform: uppercase; white-space: nowrap; }
         .desktop-actions { display: flex; gap: 8px; align-items: center; }
         
-        .main-grid { width: 100%; max-width: 1024px; margin: 48px auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 300px; gap: 64px; align-items: start; }
+        .main-grid { width: 100%; max-width: 1024px; margin: 48px auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 300px; grid-template-areas: "content sidebar" "footer sidebar"; gap: 64px; align-items: start; }
         
         /* CONTENT STYLING */
-        .document-canvas { background: transparent; padding: 0; border: none; min-width: 0; }
-        .release-flag { color: var(--ps-accent); font-weight: 700; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 16px; display: block; }
-        h1 { font-size: clamp(2rem, 4vw, 2.5rem); line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em; font-weight: 800; }
+        .document-canvas { grid-area: content; background: transparent; padding: 0; border: none; min-width: 0; }
+        .document-footer { grid-area: footer; }
+        .sidebar-ledger { grid-area: sidebar; position: sticky; top: max(100px, calc(env(safe-area-inset-top) + 80px)); display: flex; flex-direction: column; gap: 24px; font-family: var(--font-mono); font-size: 0.875rem; will-change: transform; transform: translateZ(0); min-width: 0; }
+
+        h1, h2, h3 { color: var(--ps-text); }
         h3 { font-size: 1.25rem; margin: 32px 0 16px 0; letter-spacing: -0.01em; font-weight: 700; }
         p { margin-bottom: 16px; max-width: 65ch; font-size: 1.0625rem; }
         strong { font-weight: 700; }
+
+        /* LINGUISTIC TOKENS: SUMMARY & TAKEAWAYS (THE HOOK) */
+        .hook-title { font-size: 1.5rem; font-weight: 700; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.01em; max-width: 55ch; margin-left: 0; }
+        
+        .executive-abstract { font-size: 1.125rem; color: var(--ps-text); line-height: 1.6; margin-bottom: 32px; border-left: 3px solid var(--ps-accent); padding-left: 20px; }
+        .executive-abstract p { margin-bottom: 12px; }
+        .executive-abstract p:last-child { margin-bottom: 0; }
+        
+        .takeaways-box { border: 1px solid var(--ps-border); background: var(--ps-card); padding: 24px; margin-bottom: 48px; border-radius: 2px; }
+        .takeaways-header { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--ps-accent); margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--ps-border); }
+        .takeaways-header svg { width: 14px; height: 14px; margin-left: 2px; }
+        .takeaways-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+        .takeaways-list li { position: relative; padding-left: 24px; font-size: 1.0625rem; line-height: 1.5; }
+        .takeaways-list li::before { content: "■"; position: absolute; left: 4px; top: 0; color: var(--ps-accent); font-size: 0.65rem; line-height: 2.2; }
+
+        /* LINGUISTIC TOKEN: THE LEDGER DIVIDER & OFFICIAL MANUSCRIPT */
+        .ledger-divider { border-top: 2px solid var(--ps-text); margin: 64px 0 48px 0; position: relative; }
+        .ledger-divider span { position: absolute; top: -10px; left: 0; background: var(--ps-canvas); padding-right: 16px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--ps-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+        
+        /* The SEO h1 Target */
+        .manuscript-title { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; max-width: 60ch; }
 
         /* LEGAL LEDGER */
         .quarantine-line { border: none; border-top: 1px solid var(--ps-border); margin: 40px 0 24px 0; }
@@ -77,25 +100,24 @@
         .legal-ledger h4 { font-size: 0.875rem; color: var(--ps-text); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
         .legal-ledger p { font-size: 0.75rem; margin-bottom: 16px; max-width: 100%; }
 
-        /* SIDEBAR LEDGER */
-        .sidebar-ledger { position: sticky; top: max(100px, calc(env(safe-area-inset-top) + 80px)); display: flex; flex-direction: column; gap: 24px; font-family: var(--font-mono); font-size: 0.875rem; will-change: transform; transform: translateZ(0); min-width: 0; }
-        .trust-badge { background: var(--ps-text); color: var(--ps-card); padding: 12px; text-align: center; font-weight: 700; letter-spacing: 0.05em; border-radius: 2px; }
+        /* SIDEBAR LEDGER COMPONENTS */
+        .trust-badge { background: var(--ps-text); color: var(--ps-canvas); padding: 12px; text-align: center; font-weight: 700; letter-spacing: 0.05em; border-radius: 2px; }
         .meta-block { border-left: 1px solid var(--ps-border); padding-left: 16px; }
         .meta-label { display: block; color: var(--ps-muted); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px; }
-        #hash-display { font-variant-numeric: tabular-nums; display: block; overflow-wrap: anywhere; word-break: break-all; }
+        .hash-display { font-variant-numeric: tabular-nums; display: block; overflow-wrap: anywhere; word-break: break-all; }
         
-        /* GLOBAL FOOTER (Tighter Spacing) */
+        /* GLOBAL FOOTER */
         .global-footer-wrapper { border-top: 1px solid var(--ps-border); background: var(--ps-canvas); margin-top: 40px; }
         .global-footer { width: 100%; max-width: 1024px; margin: 0 auto; padding: 32px 24px max(32px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ps-muted); }
         .global-footer h4 { font-size: 0.875rem; color: var(--ps-text); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
         .global-footer p { font-size: 0.75rem; margin-bottom: 16px; max-width: 100%; }
 
-        /* INTERACTIVE PRIMITIVES (PointSav 1px Borders) */
+        /* INTERACTIVE PRIMITIVES */
         .btn { height: 44px; padding: 0 20px; border: 1px solid var(--ps-border); background: var(--ps-card); color: var(--ps-text); font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 2px; transition: background 0.2s, border-color 0.2s; touch-action: manipulation; }
         .btn svg { display: block; flex-shrink: 0; width: 18px; height: 18px; }
         .btn span { display: block; line-height: 1; transform: translateY(1px); }
         .btn:hover { background: #f9fafb; border-color: var(--ps-text); }
-        .btn-primary { background: var(--ps-text); color: var(--ps-card); border-color: var(--ps-text); }
+        .btn-primary { background: var(--ps-text); color: var(--ps-canvas); border-color: var(--ps-text); }
         .btn-primary:hover { background: #000; }
         
         /* MOBILE ACTION BAR */
@@ -117,8 +139,9 @@
             .hide-on-mobile { display: none !important; }
             #lang-toggle:checked ~ .app-wrapper .hide-on-mobile { display: none !important; }
             
-            .main-grid { grid-template-columns: 1fr; gap: 40px; margin: 32px auto; padding: 0 16px; }
+            .main-grid { grid-template-columns: 1fr; grid-template-areas: "content" "sidebar" "footer"; gap: 40px; margin: 32px auto; padding: 0 16px; }
             .sidebar-ledger { position: relative; top: 0; transform: none; }
+            .quarantine-line { margin: 16px 0 32px 0; }
             .global-footer { grid-template-columns: 1fr; gap: 24px; padding-bottom: calc(80px + env(safe-area-inset-bottom)); } 
             .desktop-whatsapp { display: none !important; } 
             
@@ -126,29 +149,35 @@
             .mobile-dock .btn { flex: 1; height: 48px; }
         }
 
-        /* REGULATORY PRINT EGRESS (INSTITUTIONAL PARITY) */
+        /* REGULATORY PRINT EGRESS */
         .print-only { display: none; }
         @media print {
             body { color: #000000 !important; background: #FFFFFF !important; font-family: var(--font-sans) !important; }
-            
-            /* Retain wordmark as letterhead. Hide UI elements. */
             .sidebar-ledger, .mobile-dock, .desktop-actions, .desktop-whatsapp, .global-footer-wrapper, input[type="checkbox"] { display: none !important; }
-            
             .header-bar { position: static; background: transparent; padding: 0 0 16px 0; margin-bottom: 32px; border-bottom: 2px solid #000; backdrop-filter: none; }
             .wordmark { color: #000; font-size: 14pt; }
-            
             .main-grid { display: block; margin: 0; padding: 0; }
             .document-canvas { padding: 0; background: transparent; }
             
-            /* Advanced Fragmentation Physics */
-            p, .legal-ledger, .print-only { font-size: 10.5pt; line-height: 1.5; orphans: 4; widows: 4; }
+            p, .legal-ledger, .print-only, .takeaways-list li, .executive-abstract { font-size: 10.5pt; line-height: 1.5; orphans: 4; widows: 4; }
             h1, h2, h3, h4 { color: #000 !important; break-after: avoid; }
             
-            h1 { font-size: 20pt; margin-bottom: 16px; max-width: 100%; overflow-wrap: break-word; line-height: 1.1; letter-spacing: -0.02em; }
+            .hook-title { font-size: 14pt; margin-bottom: 12px; margin-left: 0; } 
+            .manuscript-title { font-size: 20pt; margin-bottom: 16px; max-width: 100%; overflow-wrap: break-word; line-height: 1.1; letter-spacing: -0.02em; }
             h3 { font-size: 14pt; margin-top: 24px; }
             
+            .abstract-label { display: none; }
+            .executive-abstract { border-left: 2px solid #000; padding-left: 16px; margin-bottom: 24px; }
+            .takeaways-box { break-inside: avoid; border: 2px solid #000; padding: 16px; margin-bottom: 32px; background: transparent; }
+            .takeaways-header { color: #000; border-bottom: 1px solid #000; padding-bottom: 8px; margin-bottom: 12px; }
+            .takeaways-list li::before { color: #000; font-size: 0.75rem; line-height: 1.8; left: 0; }
+            .takeaways-list li { padding-left: 16px; }
+            
+            .ledger-divider { border-top: 2px solid #000; margin: 32px 0; }
+            .ledger-divider span { background: #FFF; color: #000; }
+
             .print-only { display: block; margin-top: 32px; break-inside: avoid; }
-            .legal-ledger { break-inside: avoid; margin-top: 32px; border-top: 1px solid #000; padding-top: 16px; }
+            .document-footer { break-inside: avoid; margin-top: 32px; border-top: 1px solid #000; padding-top: 16px; }
             .quarantine-line { display: none; }
         }
     </style>
@@ -167,15 +196,38 @@
 
     <main class="main-grid">
         <article class="document-canvas">
-            <div class="lang-en" id="token-body-en" lang="en"></div>
-            <div class="lang-es" id="token-body-es" lang="es"></div>
-            <div class="print-only" id="token-print-contact"></div>
             
-            <hr class="quarantine-line">
-            <section class="legal-ledger" id="token-document-disclaimers"></section>
+            <div class="lang-en" lang="en">
+                <h2 class="hook-title" id="token-hook-title-en"></h2>
+                <div id="token-article-abstract-en" class="executive-abstract"></div>
+                <div id="token-article-takeaways-en"></div>
+                
+                <div class="ledger-divider"><span>FOR IMMEDIATE RELEASE</span></div>
+                
+                <h1 class="manuscript-title" id="token-official-title-en"></h1>
+                <div id="token-article-body-en"></div>
+            </div>
+            
+            <div class="lang-es" lang="es">
+                <h2 class="hook-title" id="token-hook-title-es"></h2>
+                <div id="token-article-abstract-es" class="executive-abstract"></div>
+                <div id="token-article-takeaways-es"></div>
+                
+                <div class="ledger-divider"><span>PARA PUBLICACIÓN INMEDIATA</span></div>
+                
+                <h1 class="manuscript-title" id="token-official-title-es"></h1>
+                <div id="token-article-body-es"></div>
+            </div>
+            
+            <div class="print-only" id="token-print-contact"></div>
         </article>
 
         <aside class="sidebar-ledger" id="token-sidebar"></aside>
+
+        <div class="document-footer">
+            <hr class="quarantine-line">
+            <section class="legal-ledger" id="token-document-disclaimers"></section>
+        </div>
     </main>
 
     <div class="global-footer-wrapper">
@@ -231,13 +283,11 @@
         const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
         const hashArray = Array.from(new Uint8Array(hashBuffer));
         const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        const hashEl = document.getElementById('hash-display');
-        if(hashEl) hashEl.innerText = hashHex;
+        document.querySelectorAll('.hash-display').forEach(el => el.innerText = hashHex);
     }
     
     function setCopyrightYear() {
-        const yearEl = document.getElementById('current-year');
-        if(yearEl) yearEl.textContent = new Date().getFullYear();
+        document.querySelectorAll('.current-year').forEach(el => el.textContent = new Date().getFullYear());
     }
 
     document.getElementById('lang-toggle').addEventListener('change', calculateHash);
@@ -248,6 +298,10 @@
 </script>
 
 <script>
+/* ========================================================================== */
+/* STATIC CORPORATE LEDGERS (BILINGUAL PARITY)                                */
+/* ========================================================================== */
+
 document.getElementById('token-wordmark').innerHTML = `PointSav Digital Systems`;
 
 document.getElementById('token-desktop-nav').innerHTML = `
@@ -256,9 +310,9 @@ document.getElementById('token-desktop-nav').innerHTML = `
     </label>
     <a href="https://github.com/pointsav/pointsav-monorepo" target="_blank" class="btn">
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
-        <span>MONOREPO</span>
+        <span class="lang-en">MONOREPO</span><span class="lang-es">MONOREPOSITORIO</span>
     </a>
-    <button onclick="window.print()" class="btn hide-on-mobile"><span>PRINT</span></button>
+    <button onclick="window.print()" class="btn hide-on-mobile"><span class="lang-en">PRINT</span><span class="lang-es">IMPRIMIR</span></button>
     <a href="/pointsav_media_release_en.pdf" class="btn btn-en hide-on-mobile" download><span>PDF</span></a>
     <a href="/pointsav_media_release_es.pdf" class="btn btn-es hide-on-mobile" download><span>PDF</span></a>
 `;
@@ -271,15 +325,21 @@ document.getElementById('token-mobile-dock').innerHTML = `
     </a>
 `;
 
+// BILINGUAL SIDEBAR
 document.getElementById('token-sidebar').innerHTML = `
-    <div class="trust-badge">[ ∅ ZERO COOKIES ]</div>
+    <div class="trust-badge lang-en">[ ∅ ZERO COOKIES ]</div>
+    <div class="trust-badge lang-es">[ ∅ CERO COOKIES ]</div>
     
-    <div class="meta-block">
+    <div class="meta-block lang-en">
         <span class="meta-label">Issued</span>
-        <time datetime="2026-03-02">March 2, 2026</time>
+        <time datetime="2026-03-20">March 20, 2026</time>
+    </div>
+    <div class="meta-block lang-es">
+        <span class="meta-label">Emitido</span>
+        <time datetime="2026-03-20">20 de Marzo de 2026</time>
     </div>
     
-    <div class="meta-block">
+    <div class="meta-block lang-en">
         <span class="meta-label">Contact Authority</span>
         <address style="font-style:normal;">
             <strong>Peter M. Woodfine</strong><br>
@@ -287,15 +347,34 @@ document.getElementById('token-sidebar').innerHTML = `
             Woodfine Management Corp.<br>
             595 Burrard Street,<br>
             Lower Concourse<br>
+            PO Box 48295 Bentall<br>
             Vancouver, BC V7X 1A1<br><br>
             <a href="mailto:peter@woodfinegroup.com" style="color:var(--ps-accent); text-decoration:none;">peter@woodfinegroup.com</a><br>
-            +1 604-375-1196
+            +1 604 375 1196
+        </address>
+    </div>
+    <div class="meta-block lang-es">
+        <span class="meta-label">Autoridad de Contacto</span>
+        <address style="font-style:normal;">
+            <strong>Peter M. Woodfine</strong><br>
+            Executive Officer<br><br>
+            Woodfine Management Corp.<br>
+            595 Burrard Street,<br>
+            Lower Concourse<br>
+            PO Box 48295 Bentall<br>
+            Vancouver, BC V7X 1A1<br><br>
+            <a href="mailto:peter@woodfinegroup.com" style="color:var(--ps-accent); text-decoration:none;">peter@woodfinegroup.com</a><br>
+            +1 604 375 1196
         </address>
     </div>
     
-    <div class="meta-block">
+    <div class="meta-block lang-en">
         <span class="meta-label">Cryptographic State Hash</span>
-        <span id="hash-display" style="font-size:0.75rem;">CALCULATING...</span>
+        <span class="hash-display" style="font-size:0.75rem;">CALCULATING...</span>
+    </div>
+    <div class="meta-block lang-es">
+        <span class="meta-label">Hash Criptográfico de Estado</span>
+        <span class="hash-display" style="font-size:0.75rem;">CALCULANDO...</span>
     </div>
 
     <a href="https://wa.me/16043751196" target="_blank" class="btn btn-action desktop-whatsapp" style="align-self: stretch; border-color: var(--ps-border);">
@@ -303,66 +382,122 @@ document.getElementById('token-sidebar').innerHTML = `
     </a>
 `;
 
-document.getElementById('token-body-en').innerHTML = `
-    <time class="release-flag" datetime="2026-03-02">FOR IMMEDIATE RELEASE</time>
-    <h1>PointSav Digital Systems Introduces the "Digital First" Operating System for Real Estate Infrastructure</h1>
-    <p><strong>Vancouver, British Columbia - March 2, 2026 -</strong> Woodfine Management Corp. ("Woodfine") has introduced PointSav Digital Systems ("PointSav") as a new digital infrastructure subsidiary of Woodfine Capital Projects Inc. (the "Promoter").</p>
-    <p>PointSav serves as the foundational operating system architecture for Woodfine, its administrator and first customer. PointSav is not a software-as-a-service (SaaS) platform. It is an operating system architecture designed to give building operators direct ownership, long-term security, and independent control over their physical assets and data. At its core, PointSav provides the foundation for business administration, record keeping, and cyberphysical connectivity.</p>
-    
-    <h3>The Three-Track System</h3>
-    <p>PointSav abandons the traditional model of renting cloud databases. Instead, it is actively deploying a 3-Track architecture comprising the PointSav Private Network, Totebox Orchestration, and PointSav Workplace OS:</p>
-    <p><strong>1. Private Network:</strong> A secure routing layer engineered to connect physical buildings and isolated data vaults to command centers without exposing data to the public internet.</p>
-    <p><strong>2. Orchestration:</strong> At the center of the system are distinct, independent data vaults known as Totebox Archives. For Woodfine, these are deployed in three primary configurations: Personnel Archives, Corporate Archives, and Property Archives, ensuring absolute data segregation.</p>
-    <p><strong>3. Workplace OS:</strong> A secure desktop environment that outputs deterministic, machine-readable files, not hidden database entries.</p>
-    
-    <h3>Public Technical Disclosure & Structural Compliance</h3>
-    <p>PointSav is designed to guarantee operational trust (SOC 3) and structural data ownership (DARP). This release serves as a public disclosure establishing prior art for the PointSav architecture. The architecture achieves compliance by hardcoding Six Orchestration Contracts into a proprietary no_std Rust Capability-Based Manager.</p>
-`;
-
-document.getElementById('token-body-es').innerHTML = `
-    <time class="release-flag" datetime="2026-03-02">PARA PUBLICACIÓN INMEDIATA</time>
-    <h1>PointSav Digital Systems Presenta el Sistema Operativo de "Prioridad Digital" para la Infraestructura Inmobiliaria</h1>
-    <p><strong>Vancouver, Columbia Británica - 2 de Marzo de 2026 -</strong> Woodfine Management Corp. ("Woodfine") ha introducido PointSav Digital Systems ("PointSav") como una nueva subsidiaria de infraestructura digital de Woodfine Capital Projects Inc. (el "Promotor").</p>
-    <p>PointSav sirve como la arquitectura fundamental del sistema operativo para Woodfine, su administrador y primer cliente. PointSav no es una plataforma de software como servicio (SaaS). Es una arquitectura de sistema operativo diseñada para otorgar a los operadores de edificios propiedad directa, seguridad a largo plazo y control independiente sobre sus activos y datos físicos.</p>
-    
-    <h3>El Sistema de Tres Vías</h3>
-    <p>PointSav abandona el modelo tradicional de alquilar bases de datos en la nube. En su lugar, está desplegando activamente una Arquitectura de 3 Vías que comprende la PointSav Private Network, Totebox Orchestration, y PointSav Workplace OS:</p>
-    <p><strong>1. Red Privada:</strong> Una capa de enrutamiento segura diseñada para conectar edificios físicos y bóvedas de datos aisladas a los centros de comando sin exponer los datos a la Internet pública.</p>
-    <p><strong>2. Orchestration:</strong> En el centro del sistema se encuentran bóvedas de datos independientes llamadas Archivos Totebox. Para Woodfine, se despliegan en tres configuraciones principales: Archivos de Personal, Archivos Corporativos y Archivos de Propiedad, asegurando la segregación absoluta de los datos.</p>
-    <p><strong>3. Workplace OS:</strong> Un entorno de escritorio seguro que produce archivos deterministas legibles por máquina, no entradas de bases de datos ocultas.</p>
-    
-    <h3>Divulgación Técnica Pública y Cumplimiento Estructural</h3>
-    <p>PointSav está diseñado para garantizar la confianza operativa (SOC 3) y la propiedad estructural de los datos (DARP). Este comunicado sirve como una divulgación pública que establece la técnica anterior (prior art) para la arquitectura PointSav. La arquitectura logra el cumplimiento al codificar Seis Contratos de Orquestación en un Gestor de Capacidades propietario en Rust no_std.</p>
-`;
-
+// BILINGUAL PRINT CONTACT
 document.getElementById('token-print-contact').innerHTML = `
-    <h3>CONTACT FOR FURTHER INFORMATION:</h3>
-    <p>Peter M. Woodfine<br>Executive Officer</p>
-    <p>Woodfine Management Corp.<br>595 Burrard Street,<br>Lower Concourse<br>PO BOX 48295 Bentall<br>Vancouver, BC V7X 1A1</p>
-    <p>peter@woodfinegroup.com<br>+1 604-375-1196</p>
+    <div class="lang-en">
+        <h3>CONTACT FOR FURTHER INFORMATION:</h3>
+        <p>Woodfine Management Corp.<br>Peter M. Woodfine, Executive Officer<br>595 Burrard Street, Lower Concourse<br>PO Box 48295 Bentall Vancouver, BC V7X 1A1<br><br>+1 604 375 1196<br>peter@woodfinegroup.com<br>woodfinegroup.com | pointsav.com</p>
+    </div>
+    <div class="lang-es">
+        <h3>PARA MÁS INFORMACIÓN, PÓNGASE EN CONTACTO CON:</h3>
+        <p>Woodfine Management Corp.<br>Peter M. Woodfine, Executive Officer<br>595 Burrard Street, Lower Concourse<br>PO Box 48295 Bentall Vancouver, BC V7X 1A1<br><br>+1 604 375 1196<br>peter@woodfinegroup.com<br>woodfinegroup.com | pointsav.com</p>
+    </div>
 `;
 
-// DOCUMENT-SPECIFIC DISCLAIMERS
+// UNILINGUAL LEGAL ANCHOR (Safe Harbor Compliance)
 document.getElementById('token-document-disclaimers').innerHTML = `
-    <h4>Regulatory disclosures and forward-looking statements.</h4>
-    <p>Woodfine Capital Projects Inc. operates PointSav Digital Systems as an unincorporated technology division. The enterprise capitalizes this architecture strictly through the private placement of unregistered securities. The enterprise restricts distribution globally to verified Accredited and Qualified Investors under statutory exemptions including Canada’s NI 45-106, U.S. Regulation D, Mexico’s LMV, and the EU Prospectus Regulation (EU 2017/1129) / Spain’s LMVSI. These instruments remain unregistered under the U.S. Securities Act of 1933 and applicable national laws. The enterprise prohibits sales in non-compliant jurisdictions. This news release contains forward-looking statements under the U.S. Private Securities Litigation Reform Act of 1995 and Canada’s NI 51-102. Management bases projections on specific mathematical assumptions regarding network engineering. Actual performance deviates materially if systemic technical risks materialize. Material risks include the failure of Totebox Archives to maintain cryptographically secured isolation, physical supply chain fracture, vulnerabilities in hardware protocols (Machine-Based Authorization, Diode Standard), and operational commercialization failure. Woodfine Capital Projects Inc. disclaims any obligation to update these statements except as legally mandated.</p>
+    <h4>Regulatory disclosures and forward-looking statements</h4>
+    <p>Woodfine Capital Projects Inc. operates PointSav Digital Systems as an unincorporated technology division. Management capitalizes this architecture strictly through the private placement of unregistered securities. Management restricts distribution globally to verified Accredited and Qualified Investors under statutory exemptions including Canada's NI 45-106, U.S. Regulation D, Mexico's LMV, and the EU Prospectus Regulation (EU 2017/1129) / Spain's LMVSI. These instruments remain unregistered under the U.S. Securities Act of 1933 and applicable national laws. Management prohibits sales in non-compliant jurisdictions. This news release contains forward-looking statements under the U.S. Private Securities Litigation Reform Act of 1995 and Canada's NI 51-102. Management bases projections on specific technological assumptions regarding network engineering. Actual performance deviates materially if systemic technical risks materialize. Material risks include the failure of Totebox Archives to maintain cryptographically secured isolation, physical supply chain fracture, vulnerabilities in hardware protocols (Machine-Based Authorization, Diode Standard), and operational commercialization failure. Woodfine Capital Projects Inc. disclaims any obligation to update these statements except as legally mandated.</p>
 `;
 
-// SITE-WIDE GLOBAL FOOTER (HIDDEN ON PRINT)
+// UNILINGUAL GLOBAL FOOTER (Safe Harbor Compliance)
 document.getElementById('token-global-footer').innerHTML = `
     <div class="copyright-disclaimer">
-        <h4>Important notice regarding intellectual property and trademarks.</h4>
+        <h4>Important notice regarding intellectual property and trademarks</h4>
         <p>Woodfine Capital Projects, Woodfine Management Corp, PointSav Digital Systems, Totebox Orchestration, and Totebox Archive are trademarks owned by Woodfine Capital Projects Inc. This notice serves as a formal declaration of intellectual property rights, asserting continuous use in commerce regardless of the omission of the &trade; or &reg; symbols in the accompanying text. All operational and architectural system designations (including but not limited to PointSav Console OS, PointSav Infrastructure OS, PointSav MediaKit OS, PointSav Network OS, PointSav PrivateGit OS, PointSav Workplace OS, Totebox Integration OS, and Totebox OS) are proprietary structural wordmarks utilized exclusively within the PointSav Digital Systems architecture.</p>
     </div>
-    
     <div class="digital-disclaimer">
         <h4>Digital Infrastructure & Privacy Posture</h4>
         <p>This interface operates on a Zero-Cookie and Zero-State Telemetry architecture. It does not deploy tracking cookies, retain session states, or harvest Personally Identifiable Information (PII). System interactions are limited to the collection of anonymized network routing and viewport data strictly for the purpose of auditing infrastructure performance.</p>
     </div>
 
     <div class="terminal-baseplate" style="grid-column: 1 / -1; border-top: 1px solid var(--ps-border); padding-top: 24px; margin-top: 32px; text-align: center;">
-        <p style="color: var(--ps-text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">&copy; 2011&ndash;${new Date().getFullYear()} Woodfine Management Corp. All rights reserved.</p>
+        <p style="color: var(--ps-text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">&copy; 2011&ndash;<span class="current-year"></span> Woodfine Management Corp. All rights reserved.</p>
     </div>
+`;
+
+
+/* ========================================================================== */
+/* DYNAMIC DOCUMENT HYDRATION (Pulled via PROTOCOL_DOCUMENT_HYDRATION_POINTSAV.txt) */
+/* ========================================================================== */
+
+// --- ENGLISH MANUSCRIPT ---
+document.getElementById('token-hook-title-en').innerHTML = `True ownership of physical real estate now requires structural sovereignty over its digital records.`;
+
+document.getElementById('token-article-abstract-en').innerHTML = `
+    <p>While generalized cloud computing has successfully scaled the modern economy, managing multi-generational physical assets presents a distinct operational challenge. Relying on external networks for critical building infrastructure introduces enormous complexity and human-centric vulnerabilities that long-term stewards should not have to accept.</p>
+    <p>To secure these environments, PointSav Digital Systems has released the blueprint for a specialized, independent perimeter utilizing an agentless architecture. Through our microkernel-based edge framework and freely transferable Totebox Archives, the system is designed to empower building operators to retain independent, unencumbered control over their historical data. It provides the necessary cyberphysical defense engineered to maintain the digital ledger of the asset as resilient as the concrete itself.</p>
+`;
+
+document.getElementById('token-article-takeaways-en').innerHTML = `
+    <div class="takeaways-box">
+        <div class="takeaways-header">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <span>TAKEAWAYS</span>
+        </div>
+        <ul class="takeaways-list">
+            <li>PointSav Digital Systems has introduced a foundational operating system architecture designed to secure and manage physical real estate infrastructure.</li>
+            <li>The technology focuses on "data sovereignty," designed to ensure family offices and capital partners retain independent, localized control over their building's critical records.</li>
+            <li>By decoupling essential operations from generalized cloud networks, the system engineers a robust cyberphysical defense mechanism via immutable, freely transferable data archives.</li>
+        </ul>
+    </div>
+`;
+
+document.getElementById('token-official-title-en').innerHTML = `The Shift Toward Digital Sovereignty In Physical Assets`;
+
+document.getElementById('token-article-body-en').innerHTML = `
+    <p><strong>VANCOUVER, British Columbia &mdash; March 20, 2026 &mdash;</strong> As multi-generational capital continues to flow into direct-hold real estate, a secondary challenge is emerging for family offices: operational security. While the physical concrete and steel offer tangible stability, the digital systems required to manage these assets are increasingly complex. The reliance on generalized cloud computing has highlighted a growing need for specialized controls, prompting a structural shift toward localized data ownership.</p>
+    <p>Woodfine Management Corp executes the operational management and asset ledgers for these properties. Operating strictly as a technology vendor on a cost-plus basis, PointSav Digital Systems provides the Totebox Orchestration needed for companies to easily implement a secure, decentralized command centre at their head office, shifting away from vulnerable digital portals.</p>
+    <p>Addressing this shift, PointSav Digital Systems has unveiled a blueprint for a microkernel-based edge computing architecture. Rather than outsourcing critical infrastructure data to external networks, the framework establishes a definitive perimeter, engineered to empower building operators with robust cyberphysical defense directly at the asset level.</p>
+
+    <p><strong>The Independent Digital Vault.</strong> At the core of this operational recalibration are Totebox Archives. These act as cryptographically secured, append-only data storage containers designed to be freely transferable across private networks, public clouds, or bare-metal installations at the owner's discretion.</p>
+    <p>By categorically separating critical property, corporate, and personnel data from public networks, the system is designed to prevent algorithmic scraping and establish an immutable, verifiable historical record. For the wealth preservation demographic, this translates directly to structural data ownership. It systemically limits the reliance on external cloud providers for fundamental asset information, engineered to ensure continuous disclosure and long-term integrity for the physical infrastructure.</p>
+
+    <p><strong>Aggregated Control And Defense.</strong> Security in this localized environment is fundamentally different from traditional commercial software. PointSav Digital Systems manages proprietary data flows using Totebox Orchestration, a framework that establishes a common language for fundamental behaviors without centralized control.</p>
+    <p>To further insulate the assets from human-centric vulnerabilities, the agentless architecture rejects legacy flaws like standard passwords, utilizing a Machine-Based Authorization paradigm tied to hardware pairing. Coupled with a universal one-way command flow, these encrypted, portable systems are engineered to effectively mitigate upstream vulnerabilities by design, providing robust defense against external threats.</p>
+
+    <p><strong>Ensuring Long-Term Accessibility.</strong> A critical concern for capital partners is vendor lock-in&mdash;the risk of data becoming trapped in proprietary third-party databases over decades of ownership. PointSav Digital Systems addresses this through PointSav Console OS, a secure terminal environment designed specifically for operators.</p>
+    <p>Unlike traditional models, PointSav Console OS outputs deterministic, machine-readable files. This ensures that operators can always read, access, and control their core historical records, completely unencumbered by external vendors. For multi-generational stewards, this architecture ensures that the digital ledger of an asset remains as permanent and resilient as the physical building itself.</p>
+`;
+
+
+// --- SPANISH MANUSCRIPT ---
+document.getElementById('token-hook-title-es').innerHTML = `La verdadera propiedad de los bienes raíces físicos ahora requiere soberanía estructural sobre sus registros digitales.`;
+
+document.getElementById('token-article-abstract-es').innerHTML = `
+    <p>Si bien la computaci&oacute;n en la nube generalizada ha escalado con &eacute;xito la econom&iacute;a moderna, la gesti&oacute;n de activos f&iacute;sicos multigeneracionales presenta un desaf&iacute;o operativo distinto. Depender de redes externas para la infraestructura cr&iacute;tica de los edificios introduce una enorme complejidad y vulnerabilidades centradas en los humanos que los administradores a largo plazo no deber&iacute;an tener que aceptar.</p>
+    <p>Para proteger estos entornos, PointSav Digital Systems ha publicado el modelo para un per&iacute;metro especializado e independiente utilizando una arquitectura sin agentes. A trav&eacute;s de nuestro marco de borde basado en micron&uacute;cleo y los Totebox Archives de libre transferencia, el sistema est&aacute; dise&ntilde;ado para empoderar a los operadores de edificios a retener un control independiente y libre de cargas sobre sus datos hist&oacute;ricos. Proporciona la defensa ciberf&iacute;sica necesaria, dise&ntilde;ada para mantener el libro mayor digital del activo tan resistente como el concreto mismo.</p>
+`;
+
+document.getElementById('token-article-takeaways-es').innerHTML = `
+    <div class="takeaways-box">
+        <div class="takeaways-header">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            <span>PUNTOS CLAVE</span>
+        </div>
+        <ul class="takeaways-list">
+            <li>PointSav Digital Systems ha introducido una arquitectura fundacional de sistema operativo diseñada para proteger y gestionar la infraestructura física de bienes raíces.</li>
+            <li>La tecnología se centra en la "soberanía de datos", diseñada para garantizar que las oficinas familiares y los socios de capital retengan un control independiente y localizado sobre los registros críticos de sus edificios.</li>
+            <li>Al desacoplar las operaciones esenciales de las redes de nube generalizadas, el sistema diseña un sólido mecanismo de defensa ciberfísica a través de archivos de datos inmutables y de libre transferencia.</li>
+        </ul>
+    </div>
+`;
+
+document.getElementById('token-official-title-es').innerHTML = `El Cambio Hacia La Soberanía Digital En Los Activos Físicos`;
+
+document.getElementById('token-article-body-es').innerHTML = `
+    <p><strong>VANCOUVER, British Columbia &mdash; 20 de marzo de 2026 &mdash;</strong> A medida que el capital multigeneracional contin&uacute;a fluyendo hacia los bienes ra&iacute;ces de tenencia directa, est&aacute; surgiendo un desaf&iacute;o secundario para las oficinas familiares: la seguridad operativa. Si bien el concreto y el acero f&iacute;sicos ofrecen una estabilidad tangible, los sistemas digitales requeridos para gestionar estos activos son cada vez m&aacute;s complejos. La dependencia de la computaci&oacute;n en la nube generalizada ha puesto de relieve una creciente necesidad de controles especializados, impulsando un cambio estructural hacia la propiedad localizada de los datos.</p>
+    <p>Woodfine Management Corp ejecuta la gesti&oacute;n operativa y los libros mayores de activos para estas propiedades. Operando estrictamente como un proveedor de tecnolog&iacute;a sobre una base de costo m&aacute;s margen, PointSav Digital Systems proporciona la Totebox Orchestration necesaria para que las empresas implementen f&aacute;cilmente un centro de comando seguro y descentralizado en su oficina central, alej&aacute;ndose de los portales digitales vulnerables.</p>
+    <p>Abordando este cambio, PointSav Digital Systems ha revelado un modelo para una arquitectura de computaci&oacute;n de borde basada en micron&uacute;cleo. En lugar de subcontratar los datos de infraestructura cr&iacute;tica a redes externas, el marco establece un per&iacute;metro definitivo, dise&ntilde;ado para empoderar a los operadores de edificios con una s&oacute;lida defensa ciberf&iacute;sica directamente a nivel del activo.</p>
+
+    <p><strong>La B&oacute;veda Digital Independiente.</strong> En el n&uacute;cleo de esta recalibraci&oacute;n operativa se encuentran los Totebox Archives. Estos act&uacute;an como contenedores de almacenamiento de datos de solo adici&oacute;n, asegurados criptogr&aacute;ficamente y dise&ntilde;ados para ser de libre transferencia a trav&eacute;s de redes privadas, nubes p&uacute;blicas o instalaciones en hardware f&iacute;sico a discreci&oacute;n del propietario.</p>
+    <p>Al separar categ&oacute;ricamente los datos cr&iacute;ticos de propiedad, corporativos y de personal de las redes p&uacute;blicas, el sistema est&aacute; dise&ntilde;ado para evitar la extracci&oacute;n algor&iacute;tmica de datos y establecer un registro hist&oacute;rico inmutable y verificable. Para la demograf&iacute;a de preservaci&oacute;n de la riqueza, esto se traduce directamente en la propiedad estructural de los datos. Limita sist&eacute;micamente la dependencia de proveedores de nube externos para la informaci&oacute;n fundamental de los activos, dise&ntilde;ado para garantizar la divulgaci&oacute;n continua y la integridad a largo plazo para la infraestructura f&iacute;sica.</p>
+
+    <p><strong>Control Y Defensa Agregados.</strong> La seguridad en este entorno localizado es fundamentalmente diferente del software comercial tradicional. PointSav Digital Systems gestiona los flujos de datos propietarios utilizando Totebox Orchestration, un marco que establece un lenguaje com&uacute;n para comportamientos fundamentales sin control centralizado.</p>
+    <p>Para aislar a&uacute;n m&aacute;s los activos de las vulnerabilidades centradas en los humanos, la arquitectura sin agentes rechaza las fallas heredadas como las contrase&ntilde;as est&aacute;ndar, utilizando un paradigma de Machine-Based Authorization vinculado al emparejamiento de hardware. Junto con un flujo de comandos universal unidireccional, estos sistemas cifrados y port&aacute;tiles est&aacute;n dise&ntilde;ados para mitigar eficazmente las vulnerabilidades ascendentes por dise&ntilde;o, proporcionando una s&oacute;lida defensa contra amenazas externas.</p>
+
+    <p><strong>Garantizar La Accesibilidad A Largo Plazo.</strong> Una preocupaci&oacute;n cr&iacute;tica para los socios de capital es la dependencia del proveedor: el riesgo de que los datos queden atrapados en bases de datos patentadas de terceros durante d&eacute;cadas de propiedad. PointSav Digital Systems aborda esto a trav&eacute;s de PointSav Console OS, un entorno de terminal seguro dise&ntilde;ado espec&iacute;ficamente para operadores.</p>
+    <p>A diferencia de los modelos tradicionales, PointSav Console OS genera archivos deterministas y legibles por m&aacute;quina. Esto garantiza que los operadores siempre puedan leer, acceder y controlar sus registros hist&oacute;ricos centrales, completamente libres de proveedores externos. Para los administradores multigeneracionales, esta arquitectura garantiza que el libro mayor digital de un activo siga siendo tan permanente y resistente como el propio edificio f&iacute;sico.</p>
 `;
 </script>
 </body>
