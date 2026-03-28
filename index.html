@@ -291,7 +291,7 @@
                     network: conn ? conn.effectiveType : "unknown"
                 };
                 const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-                navigator.sendBeacon("https://telemetry.pointsav.com:8081/telemetry-endpoint", blob);
+                navigator.sendBeacon("https://telemetry.pointsav.com/telemetry-endpoint", blob);
             }
         });
     })();
